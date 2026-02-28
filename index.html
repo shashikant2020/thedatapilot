@@ -13,11 +13,14 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; color: #334155; }
         .sub-nav-sticky { top: 80px; z-index: 40; }
-        details > summary { list-style: none; }
-        details > summary::-webkit-details-marker { display: none; }
+        .form-shadow { box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1); }
         .tool-card { border-radius: 8px; transition: transform 0.2s; }
         .tool-card:hover { transform: translateY(-4px); }
-        .form-shadow { box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1); }
+        
+        /* Custom Scrollbar for the curriculum content */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 10px; }
     </style>
 </head>
 <body class="bg-white">
@@ -35,6 +38,7 @@
 
         const App = () => {
             const [activeTab, setActiveTab] = useState('about');
+            const [activeModule, setActiveModule] = useState(0);
 
             const tools = [
                 { name: 'Excel', icon: 'file-spreadsheet', color: 'bg-green-50', iconColor: 'text-green-600' },
@@ -47,12 +51,158 @@
                 { name: 'Statistics', icon: 'microscope', color: 'bg-rose-50', iconColor: 'text-rose-600' }
             ];
 
-            const syllabus = [
-                { title: 'Introduction to Data & Warehousing', details: 'Understanding Data Types, Data Warehousing Concepts (Star/Snowflake Schemas), ETL processes, and Data Architecture.' },
-                { title: 'Analytical Logic (Excel & SQL)', details: 'Data understanding and warehousing concepts. Core relational logic, Advanced SQL querying, CTEs, Window Functions, and Data Wrangling using Excel and SQL.' },
-                { title: 'The Python Analytics Engine', details: 'Python for Data Analysis, NumPy, Pandas, and building automated data cleaning scripts for large datasets.' },
-                { title: 'Business Intelligence & Visuals', details: 'Professional dashboarding in Power BI and Tableau. Executive-level data storytelling and KPI tracking.' },
-                { title: 'AI Ready Analytics (Data First, AI Fast)', details: 'Scaling analytics with modern AI tools while maintaining human audit integrity and thorough data validation.' }
+            const syllabusData = [
+                {
+                    id: 0,
+                    title: "Module 1: Excel Mastery",
+                    subtitle: "Introduction to Data Analysis with Excel",
+                    content: [
+                        "Excel Interface, Data Types & Formatting",
+                        "Excel Functions (Basic to Advanced)",
+                        "Logical Functions (IF, IFS, Nested IF)",
+                        "Lookup Functions (VLOOKUP, HLOOKUP, XLOOKUP)",
+                        "INDEX + MATCH – Overview & Business Use Cases",
+                        "Text & Date Functions for Data Cleaning",
+                        "Conditional Formatting – Advanced Rules",
+                        "Sorting, Filtering & Data Validation",
+                        "Pivot Tables – Overview & Implementation",
+                        "Advanced Pivot Tables (Calculated Fields & Slicers)",
+                        "Power Query – Data Import & Transformation",
+                        "Data Cleaning Techniques (Real Dataset Practice)",
+                        "Charts & Interactive Visualizations",
+                        "Dashboarding – Design Principles & Integration",
+                        "Forecasting Basics using Analysis ToolPak",
+                        "Integrated Lab – Pivot + XLOOKUP + Dashboard Flow",
+                        "Final Project & Review (Sales Performance Dashboard)"
+                    ]
+                },
+                {
+                    id: 1,
+                    title: "Module 2: SQL Architecture",
+                    subtitle: "Data Wrangling with SQL",
+                    content: [
+                        "Introduction to Databases & RDBMS Concepts",
+                        "SQL Environment Setup & Data Import",
+                        "SELECT Statement & Filtering Data",
+                        "WHERE, AND, OR, IN, BETWEEN Operators",
+                        "ORDER BY & LIMIT Clauses",
+                        "Aggregate Functions (SUM, AVG, COUNT, MIN, MAX)",
+                        "GROUP BY & HAVING Clauses",
+                        "Joins – INNER, LEFT, RIGHT, FULL",
+                        "Subqueries & Nested Queries",
+                        "Common Table Expressions (CTEs)",
+                        "Window Functions (RANK, DENSE_RANK, ROW_NUMBER)",
+                        "Views & Query Structuring",
+                        "Data Cleaning using SQL",
+                        "Query Optimization & Performance Basics",
+                        "Exporting SQL Data to Excel / Power BI",
+                        "NL-to-SQL using AI Tools",
+                        "Integrated Lab – Business Case Querying",
+                        "Final Project & Review (SQL Business Insights Case)"
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Module 3: Python Engine",
+                    subtitle: "Python for Data Analytics",
+                    content: [
+                        "Introduction to Python & Environment Setup",
+                        "Variables, Data Types & Operators",
+                        "Conditional Statements & Loops",
+                        "Functions & Modular Coding",
+                        "File Handling & Working with CSV/Excel Files",
+                        "Introduction to NumPy",
+                        "Introduction to Pandas",
+                        "DataFrames – Filtering, Sorting & Aggregation",
+                        "Handling Missing Values & Data Cleaning",
+                        "Merging & Joining Datasets",
+                        "GroupBy & Aggregation Techniques",
+                        "Exploratory Data Analysis (EDA) Concepts",
+                        "Data Visualization with Matplotlib",
+                        "Data Visualization with Seaborn",
+                        "Statistical Analysis using Python",
+                        "AI-Assisted Python Code Generation",
+                        "Integrated Lab – EDA Workflow Implementation",
+                        "Final Project & Review (Python EDA Case Study)"
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "Module 4: Statistics & logic",
+                    subtitle: "Applied Statistical Analysis",
+                    content: [
+                        "Descriptive Statistics – Mean, Median, Mode",
+                        "Variance & Standard Deviation",
+                        "Percentiles & IQR",
+                        "Probability Basics for Data Analytics",
+                        "Sampling Techniques",
+                        "Confidence Intervals",
+                        "Hypothesis Testing – Z-Test & T-Test",
+                        "Correlation & Covariance",
+                        "Regression Basics",
+                        "Interpreting Statistical Results for Business Decisions",
+                        "EDA Strategy & Insight Extraction Framework",
+                        "Integrated Lab – Statistical Analysis Case",
+                        "Final Review & Application Discussion"
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "Module 5: BI & Visuals",
+                    subtitle: "Business Intelligence with Power BI",
+                    content: [
+                        "Introduction to Power BI & BI Concepts",
+                        "Data Connection & Data Transformation",
+                        "Data Modeling & Relationships",
+                        "DAX Basics (Calculated Columns & Measures)",
+                        "Advanced DAX Functions",
+                        "Data Visualization Best Practices",
+                        "Interactive Dashboards & Slicers",
+                        "Time Intelligence Functions",
+                        "Row-Level Security Basics",
+                        "Publishing & Sharing Dashboards",
+                        "Automated Data Refresh Concepts",
+                        "AI-Enhanced Dashboarding Techniques",
+                        "Integrated Lab – Dashboard Building",
+                        "Final Project & Review (Business Intelligence Dashboard)"
+                    ]
+                },
+                {
+                    id: 5,
+                    title: "Module 6: GenAI for Analysts",
+                    subtitle: "Generative AI in Analytics Workflow",
+                    content: [
+                        "Introduction to Generative AI in Analytics",
+                        "Prompt Engineering for Data Tasks",
+                        "AI for Excel & Spreadsheet Automation",
+                        "NL-to-SQL with AI",
+                        "AI-Assisted Dashboard Insights",
+                        "AI for Python Debugging & Code Optimization",
+                        "AI-Powered EDA & Statistical Storytelling",
+                        "Resume & Portfolio Optimization using GenAI",
+                        "Workflow Automation using AI Tools",
+                        "Ethical & Responsible AI Usage",
+                        "Integrated Practice Session – AI Workflow",
+                        "Final Review & Industry Use Cases"
+                    ]
+                },
+                {
+                    id: 6,
+                    title: "Module 7: Career Readiness",
+                    subtitle: "Aptitude & Soft Skills Training",
+                    content: [
+                        "Aptitude Training- Core Quant + Smart Arithmetic",
+                        "Aptitude Training - Visual + Verbal Reasoning Mash-up",
+                        "Aptitude Training - Decision-Making & Probability",
+                        "Grammar and Comprehension",
+                        "Communication Skills",
+                        "Resume Building",
+                        "Linkedin Profile Optimisation",
+                        "Interview Preparation",
+                        "Mock Interviews - HR",
+                        "Mock Interviews - Domain"
+                    ]
+                }
             ];
 
             const projects = [
@@ -80,7 +230,7 @@
                         </div>
                     </nav>
 
-                    {/* Sticky Sub-Navigation (Centrally Aligned, 70% utilization) */}
+                    {/* Sticky Sub-Navigation */}
                     <div className="fixed top-20 w-full z-40 bg-slate-50 border-b border-slate-200 hidden md:block">
                         <div className="max-w-5xl mx-auto flex justify-between px-4">
                             {['About', 'Syllabus', 'Tools', 'Projects', 'Videos', 'Eligibility', 'Fees'].map((tab) => (
@@ -100,18 +250,18 @@
                         <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
                             <div className="space-y-8 text-center lg:text-left">
                                 <div className="inline-block bg-cyan-50 text-cyan-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">
-                                    7 Month Hybrid Program
+                                    Job-Ready Certification Program
                                 </div>
                                 <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-slate-900">
-                                    Certification in <span className="text-cyan-500">Augmented Data Analytics</span>
+                                    Certification in <span className="text-cyan-500 underline decoration-cyan-100 underline-offset-8">Augmented Data Analytics</span>
                                 </h1>
                                 <p className="text-lg text-slate-500 max-w-xl font-medium leading-relaxed mx-auto lg:mx-0">
-                                    Master Data Warehousing, SQL, and Python with an AI Ready approach. Get job assistance and learn from industry experts.
+                                    Master Data Warehousing, SQL, and Python with an AI-Ready approach. Get comprehensive career assistance and learn from industry veterans.
                                 </p>
                                 <div className="space-y-4 max-w-lg mx-auto lg:mx-0">
                                     <div className="flex items-center space-x-3 text-sm font-semibold text-slate-700">
                                         <Icon name="check-circle" size={18} className="text-cyan-500" />
-                                        <span>Job Assistance will be provided for all eligible candidates</span>
+                                        <span>Job Assistance provided for all eligible candidates</span>
                                     </div>
                                     <div className="flex items-center space-x-3 text-sm font-semibold text-slate-700">
                                         <Icon name="check-circle" size={18} className="text-cyan-500" />
@@ -124,16 +274,16 @@
                                 </div>
                             </div>
 
-                            {/* Direct Enrollment Form */}
+                            {/* Enrollment Form */}
                             <div className="bg-white p-8 border border-slate-100 rounded-lg form-shadow max-w-md ml-auto w-full">
                                 <h3 className="text-xl font-bold mb-2 text-slate-900">Join the Program</h3>
-                                <p className="text-sm text-slate-400 mb-6 font-medium">Start your career transition today</p>
+                                <p className="text-sm text-slate-400 mb-6 font-medium">Start your professional journey today</p>
                                 <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
                                     <input type="text" placeholder="Full Name" className="w-full p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium" />
                                     <input type="email" placeholder="Email Address" className="w-full p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium" />
                                     <div className="flex space-x-2">
-                                        <input type="tel" placeholder="+91 Phone Number" className="flex-grow p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium" />
-                                        <button className="bg-cyan-500 text-white px-4 py-2 rounded font-bold text-[11px] uppercase whitespace-nowrap hover:bg-cyan-600 transition-colors">Send OTP</button>
+                                        <input type="tel" placeholder="Mobile Number" className="flex-grow p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium" />
+                                        <button className="bg-cyan-500 text-white px-4 py-2 rounded font-bold text-[11px] uppercase whitespace-nowrap hover:bg-cyan-600">Send OTP</button>
                                     </div>
                                     <input type="text" placeholder="Enter OTP" className="w-full p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium" />
                                     <button className="w-full bg-cyan-500 text-white py-4 rounded font-bold text-sm hover:bg-cyan-600 transition-colors shadow-lg shadow-cyan-100">Apply Now</button>
@@ -142,49 +292,72 @@
                         </div>
                     </header>
 
-                    {/* Highlights Section */}
-                    <section className="py-20 px-6 bg-white">
+                    {/* Interactive Curriculum Section - 150% Height Enhancement */}
+                    <section id="syllabus" className="py-32 px-6 bg-white border-y border-slate-100">
                         <div className="max-w-7xl mx-auto">
-                            <h2 className="text-3xl font-bold text-center mb-16">Course Highlights</h2>
-                            <div className="grid md:grid-cols-3 gap-10">
-                                <div className="p-8 border border-slate-100 bg-slate-50 rounded-lg">
-                                    <h4 className="text-lg font-bold mb-3">Industry First Curriculum</h4>
-                                    <p className="text-sm text-slate-500 leading-relaxed font-medium">Comprehensive training covering global data trends, modern tools, and AI Ready workflows.</p>
+                            <h2 className="text-3xl font-extrabold text-center mb-16 text-slate-900">Job-Ready Data Analytics Curriculum</h2>
+                            
+                            <div className="flex flex-col lg:flex-row gap-1 border-4 border-slate-900 bg-slate-900 min-h-[900px]">
+                                {/* Left Side: Modules */}
+                                <div className="lg:w-1/3 bg-white flex flex-col">
+                                    {syllabusData.map((mod, idx) => (
+                                        <button
+                                            key={mod.id}
+                                            onClick={() => setActiveModule(idx)}
+                                            className={`flex flex-col items-start p-8 text-left transition-all border-b border-slate-100 h-full justify-center ${activeModule === idx ? 'bg-cyan-500 text-white' : 'hover:bg-slate-50 text-slate-700'}`}
+                                        >
+                                            <span className={`text-[10px] font-black uppercase tracking-widest mb-2 ${activeModule === idx ? 'text-white' : 'text-cyan-500'}`}>Step 0{idx + 1}</span>
+                                            <span className="text-lg font-bold leading-tight">{mod.title}</span>
+                                        </button>
+                                    ))}
                                 </div>
-                                <div className="p-8 border border-slate-100 bg-slate-50 rounded-lg">
-                                    <h4 className="text-lg font-bold mb-3">Data First, AI Fast</h4>
-                                    <p className="text-sm text-slate-500 leading-relaxed font-medium">Focus on human data architectural logic first, using AI to scale your analytical output efficiently.</p>
-                                </div>
-                                <div className="p-8 border border-slate-100 bg-slate-50 rounded-lg">
-                                    <h4 className="text-lg font-bold mb-3">Vernacular Support</h4>
-                                    <p className="text-sm text-slate-500 leading-relaxed font-medium">Language support in English and Hindi for learners from semi-urban and rural backgrounds.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
 
-                    {/* Syllabus Section */}
-                    <section id="syllabus" className="py-20 px-6 bg-slate-50">
-                        <div className="max-w-5xl mx-auto">
-                            <h2 className="text-3xl font-bold text-center mb-12">Job Ready Data Analytics Curriculum</h2>
-                            <div className="space-y-4">
-                                {syllabus.map((item, i) => (
-                                    <details key={i} className="group bg-white border border-slate-200 rounded-lg overflow-hidden">
-                                        <summary className="flex justify-between items-center p-6 cursor-pointer font-bold text-slate-800 hover:bg-slate-50 transition-colors">
-                                            <span>Module {i+1}: {item.title}</span>
-                                            <Icon name="chevron-down" size={20} className="group-open:rotate-180 transition-transform text-cyan-500" />
-                                        </summary>
-                                        <div className="p-6 pt-2 text-sm text-slate-500 bg-slate-50 leading-relaxed font-medium">
-                                            {item.details}
+                                {/* Right Side: Content */}
+                                <div className="lg:w-2/3 bg-white p-12 lg:p-16 flex flex-col">
+                                    <div className="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-8">
+                                        <div className="space-y-2">
+                                            <h3 className="text-4xl font-black text-slate-900 leading-tight">{syllabusData[activeModule].subtitle}</h3>
+                                            <div className="flex items-center space-x-2 text-cyan-500 font-bold uppercase text-[11px] tracking-[0.2em]">
+                                                <Icon name="award" size={14} />
+                                                <span>Professional Benchmark</span>
+                                            </div>
                                         </div>
-                                    </details>
-                                ))}
+                                        <button className="flex items-center space-x-2 bg-slate-900 text-white px-6 py-3 rounded text-xs font-bold uppercase tracking-widest self-start md:self-center hover:bg-cyan-500 transition-colors">
+                                            <Icon name="download" size={16} />
+                                            <span>Download Brochure</span>
+                                        </button>
+                                    </div>
+
+                                    <div className="flex-grow overflow-y-auto custom-scrollbar pr-4">
+                                        <div className="grid md:grid-cols-2 gap-x-12 gap-y-6">
+                                            {syllabusData[activeModule].content.map((bullet, i) => (
+                                                <div key={i} className="flex items-start space-x-4 group">
+                                                    <div className="w-6 h-6 rounded-full bg-cyan-50 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-cyan-500 transition-colors">
+                                                        <Icon name="check" size={14} className="text-cyan-500 group-hover:text-white transition-colors" />
+                                                    </div>
+                                                    <span className="text-[15px] font-medium text-slate-600 group-hover:text-slate-900 transition-colors">{bullet}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="mt-12 pt-8 border-t border-slate-100 flex items-center justify-between text-slate-400">
+                                        <div className="flex items-center space-x-2">
+                                            <Icon name="layers" size={20} />
+                                            <span className="text-xs font-bold uppercase tracking-widest">Industry First Curriculum</span>
+                                        </div>
+                                        <div className="flex items-center space-x-2">
+                                            <Icon name="cpu" size={20} className="text-cyan-500" />
+                                            <span className="text-xs font-bold uppercase tracking-widest text-slate-900 italic">AI Ready Training</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
 
                     {/* Tools Section */}
-                    <section id="tools" className="py-20 px-6 bg-white">
+                    <section id="tools" className="py-24 px-6 bg-slate-50">
                         <div className="max-w-7xl mx-auto">
                             <h2 className="text-3xl font-bold text-center mb-16 text-slate-900">Modern Stack Industry Standard Tools</h2>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -214,23 +387,8 @@
                         </div>
                     </section>
 
-                    {/* Videos Section */}
-                    <section id="videos" className="py-20 px-6">
-                        <div className="max-w-5xl mx-auto">
-                            <h2 className="text-3xl font-bold text-center mb-12">Training Previews</h2>
-                            <div className="grid md:grid-cols-2 gap-8">
-                                <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center group cursor-pointer border-2 border-dashed border-slate-200">
-                                    <Icon name="play" size={48} className="text-cyan-500 opacity-50 group-hover:opacity-100 transition-all" />
-                                </div>
-                                <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center border-2 border-dashed border-slate-200 text-slate-400 font-semibold">
-                                    [Demo: Data Warehousing Concepts]
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
                     {/* Eligibility & Fees */}
-                    <section id="eligibility" className="py-20 px-6 bg-slate-50">
+                    <section id="eligibility" className="py-20 px-6 bg-white">
                         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
                             <div className="bg-white p-10 rounded-lg border border-slate-100">
                                 <h3 className="text-2xl font-bold mb-8">Who should do the Data Analytics course?</h3>
