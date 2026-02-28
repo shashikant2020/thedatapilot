@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Analytics Courses | Career247</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #e63946;
+    --primary-dark: #c1121f;
+    --dark: #1a1a2e;
+    --card-bg: #ffffff;
+    --border: #e5e7eb;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --accent: #f59e0b;
+    --surface: #f3f4f6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Sora', sans-serif;
+    background: #ffffff;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--text); text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .logo span { color: var(--primary); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--primary); color: #fff; border: none;
+    padding: 9px 22px; border-radius: 6px; font-family: 'Sora', sans-serif;
+    font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--primary-dark); }
+
+  /* HERO */
+  .hero {
+    position: relative; overflow: hidden;
+    padding: 90px 5% 70px;
+    background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 60%, #ffffff 100%);
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(230,57,70,0.08) 0%, transparent 65%);
+  }
+  .hero-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(230,57,70,0.12); border: 1px solid rgba(230,57,70,0.3);
+    color: var(--primary); font-size: 0.78rem; font-weight: 600;
+    padding: 5px 14px; border-radius: 100px; margin-bottom: 20px; letter-spacing: 0.05em;
+  }
+  .hero h1 {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.15;
+    margin-bottom: 20px; color: var(--text);
+  }
+  .hero h1 em { color: var(--primary); font-style: normal; }
+  .hero-desc { color: var(--muted); font-size: 1rem; line-height: 1.7; margin-bottom: 32px; max-width: 500px; }
+  .hero-stats { display: flex; gap: 32px; margin-bottom: 36px; }
+  .stat-item { }
+  .stat-num { font-family: 'Clash Display', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text); }
+  .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--primary); color: #fff; border: none;
+    padding: 14px 28px; border-radius: 8px; font-family: 'Sora', sans-serif;
+    font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+    padding: 14px 28px; border-radius: 8px; font-family: 'Sora', sans-serif;
+    font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: #9ca3af; background: var(--surface); }
+
+  /* HERO CARD */
+  .hero-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  }
+  .hero-card-img {
+    width: 100%; height: 220px;
+    background: linear-gradient(135deg, #fff0f0 0%, #ffe0e0 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem; position: relative; overflow: hidden;
+  }
+  .hero-card-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, #ffffff);
+  }
+  .hero-card-body { padding: 20px; }
+  .hero-card-title { font-family: 'Clash Display', sans-serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; color: var(--text); }
+  .hero-card-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .meta-pill {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 0.75rem; color: var(--muted);
+    background: var(--surface); padding: 4px 10px; border-radius: 100px;
+  }
+  .hero-card-price { margin-bottom: 16px; }
+  .price-original { font-size: 0.85rem; color: var(--muted); text-decoration: line-through; }
+  .price-current { font-family: 'Clash Display', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--text); }
+  .price-off { font-size: 0.8rem; color: #16a34a; font-weight: 600; margin-left: 8px; }
+  .enroll-btn {
+    width: 100%; background: var(--primary); color: #fff; border: none;
+    padding: 12px; border-radius: 8px; font-family: 'Sora', sans-serif;
+    font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
+  }
+  .enroll-btn:hover { background: var(--primary-dark); }
+
+  /* SECTION */
+  .section { padding: 72px 5%; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+    color: var(--primary); text-transform: uppercase; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 14px; color: var(--text);
+  }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 600px; margin-bottom: 48px; }
+
+  /* OUTCOMES */
+  .outcomes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .outcome-card {
+    background: #ffffff; border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .outcome-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(230,57,70,0.1); }
+  .outcome-icon { font-size: 2rem; margin-bottom: 14px; }
+  .outcome-title { font-family: 'Clash Display', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+  .outcome-desc { color: var(--muted); font-size: 0.875rem; line-height: 1.6; }
+
+  /* CURRICULUM */
+  .curriculum-list { display: flex; flex-direction: column; gap: 12px; }
+  .curriculum-item {
+    background: #ffffff; border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 22px;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .curriculum-item:hover { border-color: #d1d5db; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .curriculum-item.active { border-color: var(--primary); }
+  .curr-left { display: flex; align-items: center; gap: 16px; }
+  .curr-num {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: #fff0f0; display: flex; align-items: center; justify-content: center;
+    font-family: 'Clash Display', sans-serif; font-weight: 700; font-size: 0.9rem;
+    color: var(--primary); flex-shrink: 0;
+  }
+  .curr-title { font-weight: 500; font-size: 0.95rem; color: var(--text); }
+  .curr-sub { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+  .curr-tag {
+    font-size: 0.72rem; background: rgba(230,57,70,0.12); color: var(--primary);
+    border: 1px solid rgba(230,57,70,0.25); padding: 3px 10px; border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* TOOLS */
+  .tools-grid { display: flex; flex-wrap: wrap; gap: 14px; }
+  .tool-pill {
+    background: #ffffff; border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 20px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.875rem; font-weight: 500; color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .tool-pill:hover { border-color: var(--primary); box-shadow: 0 2px 8px rgba(230,57,70,0.1); }
+  .tool-pill span { font-size: 1.4rem; }
+
+  /* MENTORS */
+  .mentors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .mentor-card {
+    background: #ffffff; border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .mentor-avatar {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary) 0%, #c1121f 100%);
+    margin: 0 auto 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Clash Display', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff;
+  }
+  .mentor-name { font-family: 'Clash Display', sans-serif; font-weight: 600; font-size: 1.05rem; margin-bottom: 4px; color: var(--text); }
+  .mentor-role { font-size: 0.8rem; color: var(--muted); margin-bottom: 8px; }
+  .mentor-company {
+    font-size: 0.75rem; font-weight: 600; color: var(--primary);
+    background: rgba(230,57,70,0.1); padding: 3px 12px; border-radius: 100px;
+    display: inline-block;
+  }
+
+  /* PLACEMENT */
+  .placement-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .placement-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .pstat {
+    background: #ffffff; border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .pstat-num { font-family: 'Clash Display', sans-serif; font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+  .pstat-label { font-size: 0.8rem; color: var(--muted); }
+  .company-logos { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .company-logo {
+    background: #ffffff; border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 18px;
+    font-size: 0.8rem; font-weight: 600; color: var(--text);
+  }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: #ffffff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .faq-q {
+    padding: 18px 22px; font-weight: 500; font-size: 0.95rem; color: var(--text);
+    display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .faq-q:hover { background: var(--surface); }
+  .faq-chevron { color: var(--primary); font-size: 1.2rem; transition: transform 0.25s; }
+  .faq-a { padding: 0 22px 18px; color: var(--muted); font-size: 0.875rem; line-height: 1.7; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--primary) 0%, #c1121f 100%);
+    border-radius: 20px; padding: 60px 48px;
+    text-align: center; margin: 0 5% 80px; max-width: 1200px;
+    margin-left: auto; margin-right: auto;
+    position: relative; overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .cta-banner h2 { font-family: 'Clash Display', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 14px; position: relative; }
+  .cta-banner p { font-size: 1rem; opacity: 0.85; margin-bottom: 32px; position: relative; }
+  .cta-banner .btn-white {
+    background: #fff; color: var(--primary); border: none;
+    padding: 14px 32px; border-radius: 8px; font-family: 'Sora', sans-serif;
+    font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+    position: relative;
+  }
+  .cta-banner .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 5%;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: gap;
+    max-width: 1400px; margin: 0 auto;
+  }
+  .footer-copy { color: var(--muted); font-size: 0.8rem; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; }
+  .footer-links a:hover { color: #fff; }
+
+  /* ANIMATE */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content { animation: fadeUp 0.7s ease both; }
+  .hero-card { animation: fadeUp 0.7s 0.15s ease both; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-card { max-width: 420px; }
+    .placement-grid { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Career<span>247</span></a>
+  <ul class="nav-links">
+    <li><a href="#">Programs</a></li>
+    <li><a href="#">Mentors</a></li>
+    <li><a href="#">Companies</a></li>
+    <li><a href="#">Success Stories</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <button class="nav-cta">Get Started Free</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge">🎓 Job-Assisted Program</div>
+      <h1>Launch Your Career in <em>Data Analytics</em> with Expert Mentorship</h1>
+      <p class="hero-desc">Master Python, SQL, Power BI, and more with industry mentors. Get placement assistance and land your dream data role in 6 months.</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">6500+</div>
+          <div class="stat-label">Students Placed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">94%</div>
+          <div class="stat-label">Placement Rate</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">8.5 LPA</div>
+          <div class="stat-label">Avg Package</div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <button class="btn-primary">Enroll Now</button>
+        <button class="btn-outline">Download Brochure</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-img">📊</div>
+      <div class="hero-card-body">
+        <div class="hero-card-title">Data Analytics — Job-Assisted Program</div>
+        <div class="hero-card-meta">
+          <div class="meta-pill">⏱ 6 Months</div>
+          <div class="meta-pill">🎯 Live + Recorded</div>
+          <div class="meta-pill">📜 Certificate</div>
+          <div class="meta-pill">💼 Placement Support</div>
+        </div>
+        <div class="hero-card-price">
+          <div class="price-original">₹49,999</div>
+          <span class="price-current">₹29,999</span>
+          <span class="price-off">40% OFF</span>
+        </div>
+        <button class="enroll-btn">Enroll Now →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">What You'll Achieve</div>
+    <h2 class="section-title">Learning Outcomes</h2>
+    <p class="section-sub">Everything you need to become a job-ready data analyst from day one.</p>
+    <div class="outcomes-grid">
+      <div class="outcome-card">
+        <div class="outcome-icon">🐍</div>
+        <div class="outcome-title">Python for Data Analysis</div>
+        <div class="outcome-desc">Master Pandas, NumPy, and Matplotlib to manipulate and visualize datasets at scale.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">🗄️</div>
+        <div class="outcome-title">SQL & Database Mastery</div>
+        <div class="outcome-desc">Write complex queries, work with relational databases, and extract insights from raw data.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">📊</div>
+        <div class="outcome-title">Power BI & Tableau</div>
+        <div class="outcome-desc">Build interactive dashboards and compelling data stories for business stakeholders.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">📈</div>
+        <div class="outcome-title">Statistics & Probability</div>
+        <div class="outcome-desc">Apply statistical thinking to real-world problems, hypothesis testing, and predictive models.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">☁️</div>
+        <div class="outcome-title">Cloud & Big Data Basics</div>
+        <div class="outcome-desc">Exposure to GCP, AWS, and tools like Spark for handling large-scale data pipelines.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">💼</div>
+        <div class="outcome-title">Industry Projects</div>
+        <div class="outcome-desc">Build 5+ portfolio-ready projects with real datasets from finance, e-commerce, and healthcare.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="section" style="background: var(--surface);">
+  <div class="section-inner">
+    <div class="section-label">Curriculum</div>
+    <h2 class="section-title">What You'll Learn</h2>
+    <p class="section-sub">A structured 6-month journey from foundations to advanced analytics.</p>
+    <div class="curriculum-list">
+      <div class="curriculum-item active">
+        <div class="curr-left">
+          <div class="curr-num">01</div>
+          <div>
+            <div class="curr-title">Excel & Spreadsheet Analytics</div>
+            <div class="curr-sub">Pivot tables, VLOOKUP, data cleaning, charting</div>
+          </div>
+        </div>
+        <div class="curr-tag">Week 1–2</div>
+      </div>
+      <div class="curriculum-item">
+        <div class="curr-left">
+          <div class="curr-num">02</div>
+          <div>
+            <div class="curr-title">SQL for Data Analysts</div>
+            <div class="curr-sub">Joins, aggregations, subqueries, window functions</div>
+          </div>
+        </div>
+        <div class="curr-tag">Week 3–5</div>
+      </div>
+      <div class="curriculum-item">
+        <div class="curr-left">
+          <div class="curr-num">03</div>
+          <div>
+            <div class="curr-title">Python for Data Science</div>
+            <div class="curr-sub">Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn intro</div>
+          </div>
+        </div>
+        <div class="curr-tag">Week 6–10</div>
+      </div>
+      <div class="curriculum-item">
+        <div class="curr-left">
+          <div class="curr-num">04</div>
+          <div>
+            <div class="curr-title">Statistics & Probability</div>
+            <div class="curr-sub">Descriptive stats, distributions, hypothesis testing, A/B testing</div>
+          </div>
+        </div>
+        <div class="curr-tag">Week 11–13</div>
+      </div>
+      <div class="curriculum-item">
+        <div class="curr-left">
+          <div class="curr-num">05</div>
+          <div>
+            <div class="curr-title">Data Visualization & BI Tools</div>
+            <div class="curr-sub">Power BI, Tableau, storytelling with data</div>
+          </div>
+        </div>
+        <div class="curr-tag">Week 14–17</div>
+      </div>
+      <div class="curriculum-item">
+        <div class="curr-left">
+          <div class="curr-num">06</div>
+          <div>
+            <div class="curr-title">Capstone Projects & Placement Prep</div>
+            <div class="curr-sub">Portfolio building, mock interviews, resume, LinkedIn</div>
+          </div>
+        </div>
+        <div class="curr-tag">Week 18–24</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Tech Stack</div>
+    <h2 class="section-title">Tools & Technologies</h2>
+    <p class="section-sub">Industry-standard tools you'll master throughout the program.</p>
+    <div class="tools-grid">
+      <div class="tool-pill"><span>🐍</span> Python</div>
+      <div class="tool-pill"><span>🗄️</span> MySQL</div>
+      <div class="tool-pill"><span>📊</span> Power BI</div>
+      <div class="tool-pill"><span>📉</span> Tableau</div>
+      <div class="tool-pill"><span>📗</span> Excel</div>
+      <div class="tool-pill"><span>☁️</span> Google BigQuery</div>
+      <div class="tool-pill"><span>📓</span> Jupyter Notebook</div>
+      <div class="tool-pill"><span>🐼</span> Pandas</div>
+      <div class="tool-pill"><span>🔢</span> NumPy</div>
+      <div class="tool-pill"><span>📐</span> Statistics</div>
+      <div class="tool-pill"><span>🤖</span> Scikit-learn</div>
+      <div class="tool-pill"><span>🌐</span> AWS S3</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENTORS -->
+<section class="section" style="background: var(--surface);">
+  <div class="section-inner">
+    <div class="section-label">Expert Mentors</div>
+    <h2 class="section-title">Learn from the Best</h2>
+    <p class="section-sub">Industry professionals from top companies who bring real-world expertise to every session.</p>
+    <div class="mentors-grid">
+      <div class="mentor-card">
+        <div class="mentor-avatar">AK</div>
+        <div class="mentor-name">Arjun Kapoor</div>
+        <div class="mentor-role">Senior Data Analyst · 8 yrs exp</div>
+        <div class="mentor-company">Google</div>
+      </div>
+      <div class="mentor-card">
+        <div class="mentor-avatar">PM</div>
+        <div class="mentor-name">Priya Mehta</div>
+        <div class="mentor-role">BI Developer · 6 yrs exp</div>
+        <div class="mentor-company">Microsoft</div>
+      </div>
+      <div class="mentor-card">
+        <div class="mentor-avatar">RS</div>
+        <div class="mentor-name">Rohit Sharma</div>
+        <div class="mentor-role">Data Scientist · 10 yrs exp</div>
+        <div class="mentor-company">Amazon</div>
+      </div>
+      <div class="mentor-card">
+        <div class="mentor-avatar">SG</div>
+        <div class="mentor-name">Sneha Gupta</div>
+        <div class="mentor-role">Analytics Lead · 7 yrs exp</div>
+        <div class="mentor-company">Flipkart</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLACEMENT -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Placement Support</div>
+    <h2 class="section-title">Your Career, Our Commitment</h2>
+    <div class="placement-grid">
+      <div>
+        <div class="placement-stats">
+          <div class="pstat">
+            <div class="pstat-num">94%</div>
+            <div class="pstat-label">Placement Rate</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-num">8.5 LPA</div>
+            <div class="pstat-label">Average Package</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-num">22 LPA</div>
+            <div class="pstat-label">Highest Package</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-num">500+</div>
+            <div class="pstat-label">Hiring Partners</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.2rem; margin-bottom: 16px; color: var(--text);">Our graduates work at</h3>
+        <div class="company-logos">
+          <div class="company-logo">Google</div>
+          <div class="company-logo">Amazon</div>
+          <div class="company-logo">Microsoft</div>
+          <div class="company-logo">Infosys</div>
+          <div class="company-logo">TCS</div>
+          <div class="company-logo">Wipro</div>
+          <div class="company-logo">Deloitte</div>
+          <div class="company-logo">Accenture</div>
+          <div class="company-logo">Flipkart</div>
+          <div class="company-logo">Swiggy</div>
+          <div class="company-logo">Paytm</div>
+          <div class="company-logo">Meesho</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background: var(--surface);">
+  <div class="section-inner">
+    <div class="section-label">FAQs</div>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do I need a coding background to join? <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">No prior coding experience is required. Our curriculum starts from the fundamentals and gradually progresses to advanced topics. All you need is dedication and curiosity.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Are classes live or recorded? <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">We offer both live instructor-led sessions and recorded backups so you never miss a class. Live sessions are held on weekday evenings and weekends to suit working professionals.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What kind of placement support is provided? <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">Our placement team provides resume building, mock interviews, LinkedIn profile optimization, and direct referrals to our 500+ hiring partners. You'll have dedicated career coaches until you land a job.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Is there an EMI option available? <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">Yes! We offer 0% EMI options starting at ₹2,999/month. We also have income share agreements where you pay only after you get placed.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Will I get a certificate upon completion? <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">Yes, you'll receive an industry-recognized certificate from Career247 upon successful completion. The certificate is widely recognized by our 500+ hiring partners.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div style="padding: 60px 5% 0;">
+  <div class="cta-banner">
+    <h2>Ready to Become a Data Analyst?</h2>
+    <p>Join 6,500+ students who transformed their careers with Career247. Limited seats available.</p>
+    <button class="btn-white">Enroll Now — ₹29,999</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="padding: 40px 5%; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; max-width:1400px; margin:0 auto; border-top: 1px solid var(--border);">
+  <a href="#" class="logo">Career<span>247</span></a>
+  <p class="footer-copy">© 2025 Career247, An Adda247 Company. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
