@@ -3,290 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL Masterclass | Job-Assisted Program</title>
+    <title>The Institute | Augmented Data Analytics Certification</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .ai-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
-        }
-        .text-gradient {
-            background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            border-color: #6366f1;
-            box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);
-        }
-        pre {
-            background: #0f172a !important;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            overflow-x: auto;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; color: #334155; }
+        .sub-nav-sticky { top: 80px; z-index: 40; }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        .tool-card { border-radius: 8px; transition: transform 0.2s; }
+        .tool-card:hover { transform: translateY(-4px); }
+        .form-shadow { box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1); }
     </style>
 </head>
-<body class="bg-[#020617] text-slate-200 selection:bg-indigo-500/30">
+<body class="bg-white">
+    <div id="root"></div>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 glass border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-database text-white text-sm"></i>
-                </div>
-                <span class="font-bold text-xl tracking-tight uppercase">Career<span class="text-indigo-500">247</span></span>
-            </div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
-                <a href="#" class="hover:text-white transition-colors">Program Overview</a>
-                <a href="#" class="hover:text-white transition-colors">Curriculum</a>
-                <a href="#" class="hover:text-white transition-colors">Case Studies</a>
-                <button class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-full transition-all">Enroll Now</button>
-            </div>
-        </div>
-    </nav>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-    <!-- Hero Section -->
-    <header class="pt-32 pb-20 px-6 ai-gradient relative overflow-hidden">
-        <div class="absolute inset-0 opacity-20 pointer-events-none">
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500 rounded-full blur-[120px]"></div>
-            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500 rounded-full blur-[120px]"></div>
-        </div>
-        
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-widest mb-6">
-                <i class="fas fa-bolt"></i> Advanced SQL Module
-            </div>
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
-                Mastering the <span class="text-gradient">Logical Journey</span> of Data
-            </h1>
-            <p class="text-slate-400 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
-                Unlock professional-level analytics by understanding how SQL Joins and Data Handling work together to solve real-world business challenges.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#challenge" class="px-8 py-3 bg-white text-slate-900 font-bold rounded-xl hover:bg-indigo-50 transition-all flex items-center gap-2">
-                    Start Learning <i class="fas fa-arrow-right text-xs"></i>
-                </a>
-                <a href="#" class="px-8 py-3 glass font-bold rounded-xl hover:bg-white/5 transition-all">
-                    Download Resources
-                </a>
-            </div>
-        </div>
-    </header>
+        const Icon = ({ name, size = 20, className = "" }) => {
+            useEffect(() => {
+                if (window.lucide) window.lucide.createIcons();
+            }, [name]);
+            return <i data-lucide={name} className={className} style={{ width: size, height: size }}></i>;
+        };
 
-    <main class="max-w-7xl mx-auto px-6 py-20">
-        
-        <!-- The Challenge -->
-        <section id="challenge" class="mb-32 scroll-mt-24">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 text-sm italic">?</span>
-                        The Business Challenge
-                    </h2>
-                    <div class="glass p-8 rounded-2xl border-l-4 border-l-indigo-500">
-                        <blockquote class="text-xl italic text-slate-300 mb-0">
-                            "Calculate the total revenue generated by every customer in the Northwind database. The report should display the <strong>CompanyName</strong> and the <strong>TotalSpending</strong>. Crucially, for customers who have never placed an order, the TotalSpending should be displayed as <strong>0</strong>."
-                        </blockquote>
-                    </div>
-                </div>
-                <div class="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 flex flex-col gap-4">
-                    <div class="flex items-center gap-4 p-4 bg-slate-800/50 rounded-xl">
-                        <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-400">
-                            <i class="fas fa-user-friends"></i>
+        const App = () => {
+            const [activeTab, setActiveTab] = useState('about');
+
+            const tools = [
+                { name: 'Excel', icon: 'file-spreadsheet', color: 'bg-green-50', iconColor: 'text-green-600' },
+                { name: 'SQL Server', icon: 'database', color: 'bg-cyan-50', iconColor: 'text-cyan-600' },
+                { name: 'Python', icon: 'terminal', color: 'bg-yellow-50', iconColor: 'text-yellow-600' },
+                { name: 'Power BI', icon: 'bar-chart-3', color: 'bg-amber-50', iconColor: 'text-amber-600' },
+                { name: 'Tableau', icon: 'layout', color: 'bg-cyan-50', iconColor: 'text-cyan-600' },
+                { name: 'AI Ready (LLMs)', icon: 'cpu', color: 'bg-indigo-50', iconColor: 'text-indigo-600' },
+                { name: 'Warehousing', icon: 'layers', color: 'bg-slate-50', iconColor: 'text-slate-600' },
+                { name: 'Statistics', icon: 'microscope', color: 'bg-rose-50', iconColor: 'text-rose-600' }
+            ];
+
+            const syllabus = [
+                { title: 'Introduction to Data & Warehousing', details: 'Understanding Data Types, Data Warehousing Concepts (Star/Snowflake Schemas), ETL processes, and Data Architecture.' },
+                { title: 'Analytical Logic (Excel & SQL)', details: 'Data understanding and warehousing concepts. Core relational logic, Advanced SQL querying, CTEs, Window Functions, and Data Wrangling using Excel and SQL.' },
+                { title: 'The Python Analytics Engine', details: 'Python for Data Analysis, NumPy, Pandas, and building automated data cleaning scripts for large datasets.' },
+                { title: 'Business Intelligence & Visuals', details: 'Professional dashboarding in Power BI and Tableau. Executive-level data storytelling and KPI tracking.' },
+                { title: 'AI Ready Analytics (Data First, AI Fast)', details: 'Scaling analytics with modern AI tools while maintaining human audit integrity and thorough data validation.' }
+            ];
+
+            const projects = [
+                { title: 'Financial KPI Dashboard', domain: 'Finance', type: 'Capstone' },
+                { title: 'UPI Transaction Analysis', domain: 'Retail', type: 'Industry' },
+                { title: 'Black Friday Sales Forecasting', domain: 'SaaS', type: 'Real-time' }
+            ];
+
+            return (
+                <div className="min-h-screen">
+                    {/* Header Ribbon */}
+                    <nav className="fixed w-full z-50 bg-white border-b border-slate-100 h-20 flex items-center shadow-sm">
+                        <div className="max-w-7xl mx-auto px-6 w-full flex justify-between items-center">
+                            <div className="flex items-center space-x-2">
+                                <div className="w-8 h-8 bg-cyan-500 flex items-center justify-center rounded">
+                                    <Icon name="bar-chart-3" size={18} className="text-white" />
+                                </div>
+                                <span className="font-bold text-xl text-slate-800 tracking-tight">The Institute</span>
+                            </div>
+                            <div className="hidden lg:flex items-center space-x-8 text-sm font-semibold text-slate-500">
+                                <a href="#" className="hover:text-cyan-500 transition-colors">All Programs</a>
+                                <button className="text-cyan-600 font-bold hover:underline">Request Callback</button>
+                                <button className="bg-cyan-500 text-white px-6 py-2.5 rounded font-bold hover:bg-cyan-600 transition-colors">Join Program</button>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-xs uppercase text-slate-500 font-bold tracking-widest">Target Object</p>
-                            <p class="font-semibold text-white">Every Single Customer</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4 p-4 bg-slate-800/50 rounded-xl">
-                        <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center text-purple-400">
-                            <i class="fas fa-calculator"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs uppercase text-slate-500 font-bold tracking-widest">Formula</p>
-                            <p class="font-semibold text-white">Unit_Price &times; Quantity</p>
+                    </nav>
+
+                    {/* Sticky Sub-Navigation (Centrally Aligned, 70% utilization) */}
+                    <div className="fixed top-20 w-full z-40 bg-slate-50 border-b border-slate-200 hidden md:block">
+                        <div className="max-w-5xl mx-auto flex justify-between px-4">
+                            {['About', 'Syllabus', 'Tools', 'Projects', 'Videos', 'Eligibility', 'Fees'].map((tab) => (
+                                <a 
+                                    key={tab}
+                                    href={`#${tab.toLowerCase()}`}
+                                    className="py-4 text-sm font-bold text-slate-500 hover:text-cyan-500 border-b-2 border-transparent hover:border-cyan-500 transition-all"
+                                >
+                                    {tab}
+                                </a>
+                            ))}
                         </div>
                     </div>
-                    <div class="flex items-center gap-4 p-4 bg-emerald-500/20 rounded-xl">
-                        <div class="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-400">
-                            <i class="fas fa-check-circle"></i>
+
+                    {/* Hero Section */}
+                    <header id="about" className="pt-48 pb-24 px-6 bg-slate-50/50">
+                        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+                            <div className="space-y-8 text-center lg:text-left">
+                                <div className="inline-block bg-cyan-50 text-cyan-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">
+                                    7 Month Hybrid Program
+                                </div>
+                                <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-slate-900">
+                                    Certification in <span className="text-cyan-500">Augmented Data Analytics</span>
+                                </h1>
+                                <p className="text-lg text-slate-500 max-w-xl font-medium leading-relaxed mx-auto lg:mx-0">
+                                    Master Data Warehousing, SQL, and Python with an AI Ready approach. Get job assistance and learn from industry experts.
+                                </p>
+                                <div className="space-y-4 max-w-lg mx-auto lg:mx-0">
+                                    <div className="flex items-center space-x-3 text-sm font-semibold text-slate-700">
+                                        <Icon name="check-circle" size={18} className="text-cyan-500" />
+                                        <span>Job Assistance will be provided for all eligible candidates</span>
+                                    </div>
+                                    <div className="flex items-center space-x-3 text-sm font-semibold text-slate-700">
+                                        <Icon name="check-circle" size={18} className="text-cyan-500" />
+                                        <span>12+ Industry First Projects and Case Studies</span>
+                                    </div>
+                                </div>
+                                <div className="pt-4 flex justify-center lg:justify-start items-center gap-6">
+                                    <button className="bg-slate-900 text-white px-8 py-4 rounded font-bold hover:bg-cyan-500 transition-all">Explore Course</button>
+                                    <button className="text-slate-900 font-bold underline">Download Brochure</button>
+                                </div>
+                            </div>
+
+                            {/* Direct Enrollment Form */}
+                            <div className="bg-white p-8 border border-slate-100 rounded-lg form-shadow max-w-md ml-auto w-full">
+                                <h3 className="text-xl font-bold mb-2 text-slate-900">Join the Program</h3>
+                                <p className="text-sm text-slate-400 mb-6 font-medium">Start your career transition today</p>
+                                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                                    <input type="text" placeholder="Full Name" className="w-full p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium" />
+                                    <input type="email" placeholder="Email Address" className="w-full p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium" />
+                                    <div className="flex space-x-2">
+                                        <input type="tel" placeholder="+91 Phone Number" className="flex-grow p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium" />
+                                        <button className="bg-cyan-500 text-white px-4 py-2 rounded font-bold text-[11px] uppercase whitespace-nowrap hover:bg-cyan-600 transition-colors">Send OTP</button>
+                                    </div>
+                                    <input type="text" placeholder="Enter OTP" className="w-full p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium" />
+                                    <button className="w-full bg-cyan-500 text-white py-4 rounded font-bold text-sm hover:bg-cyan-600 transition-colors shadow-lg shadow-cyan-100">Apply Now</button>
+                                </form>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-xs uppercase text-slate-500 font-bold tracking-widest">Constraint</p>
-                            <p class="font-semibold text-white">Show 0 for Unmatched Records</p>
+                    </header>
+
+                    {/* Highlights Section */}
+                    <section className="py-20 px-6 bg-white">
+                        <div className="max-w-7xl mx-auto">
+                            <h2 className="text-3xl font-bold text-center mb-16">Course Highlights</h2>
+                            <div className="grid md:grid-cols-3 gap-10">
+                                <div className="p-8 border border-slate-100 bg-slate-50 rounded-lg">
+                                    <h4 className="text-lg font-bold mb-3">Industry First Curriculum</h4>
+                                    <p className="text-sm text-slate-500 leading-relaxed font-medium">Comprehensive training covering global data trends, modern tools, and AI Ready workflows.</p>
+                                </div>
+                                <div className="p-8 border border-slate-100 bg-slate-50 rounded-lg">
+                                    <h4 className="text-lg font-bold mb-3">Data First, AI Fast</h4>
+                                    <p className="text-sm text-slate-500 leading-relaxed font-medium">Focus on human data architectural logic first, using AI to scale your analytical output efficiently.</p>
+                                </div>
+                                <div className="p-8 border border-slate-100 bg-slate-50 rounded-lg">
+                                    <h4 className="text-lg font-bold mb-3">Vernacular Support</h4>
+                                    <p className="text-sm text-slate-500 leading-relaxed font-medium">Language support in English and Hindi for learners from semi-urban and rural backgrounds.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                    </section>
 
-        <!-- Sir & Student Podcast Section -->
-        <section class="mb-32">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Masterclass <span class="text-indigo-400">Dialogue</span></h2>
-                <p class="text-slate-400">Deconstructing complex concepts into simple logic.</p>
-            </div>
-
-            <div class="max-w-4xl mx-auto space-y-8">
-                <!-- Dialogue Item -->
-                <div class="flex flex-col items-start">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-slate-400">
-                            <i class="fas fa-user-graduate"></i>
+                    {/* Syllabus Section */}
+                    <section id="syllabus" className="py-20 px-6 bg-slate-50">
+                        <div className="max-w-5xl mx-auto">
+                            <h2 className="text-3xl font-bold text-center mb-12">Job Ready Data Analytics Curriculum</h2>
+                            <div className="space-y-4">
+                                {syllabus.map((item, i) => (
+                                    <details key={i} className="group bg-white border border-slate-200 rounded-lg overflow-hidden">
+                                        <summary className="flex justify-between items-center p-6 cursor-pointer font-bold text-slate-800 hover:bg-slate-50 transition-colors">
+                                            <span>Module {i+1}: {item.title}</span>
+                                            <Icon name="chevron-down" size={20} className="group-open:rotate-180 transition-transform text-cyan-500" />
+                                        </summary>
+                                        <div className="p-6 pt-2 text-sm text-slate-500 bg-slate-50 leading-relaxed font-medium">
+                                            {item.details}
+                                        </div>
+                                    </details>
+                                ))}
+                            </div>
                         </div>
-                        <span class="font-bold text-slate-300">Student</span>
-                    </div>
-                    <div class="glass p-6 rounded-2xl rounded-tl-none border border-slate-700 max-w-[85%]">
-                        <p class="text-slate-300 leading-relaxed">
-                            Sir, I'm getting lost in the vocabulary. The boss asks for 'Total Spending,' but the table has 'Sales' and sometimes people call it 'Revenue.' Are these different things?
-                        </p>
-                    </div>
-                </div>
+                    </section>
 
-                <!-- Dialogue Item (Sir) -->
-                <div class="flex flex-col items-end">
-                    <div class="flex flex-row-reverse items-center gap-3 mb-3">
-                        <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white">
-                            <i class="fas fa-chalkboard-teacher"></i>
+                    {/* Tools Section */}
+                    <section id="tools" className="py-20 px-6 bg-white">
+                        <div className="max-w-7xl mx-auto">
+                            <h2 className="text-3xl font-bold text-center mb-16 text-slate-900">Modern Stack Industry Standard Tools</h2>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                                {tools.map((tool, i) => (
+                                    <div key={i} className={`${tool.color} tool-card p-12 flex flex-col items-center justify-center space-y-5 border border-slate-50 shadow-sm`}>
+                                        <Icon name={tool.icon} size={56} className={tool.iconColor} />
+                                        <span className="font-bold text-slate-700">{tool.name}</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <span class="font-bold text-indigo-400 text-right">Sir</span>
-                    </div>
-                    <div class="bg-indigo-600/10 p-6 rounded-2xl rounded-tr-none border border-indigo-500/30 max-w-[85%]">
-                        <div class="text-slate-200 leading-relaxed">
-                            Great observation. In a database, they are actually the exact same number, just viewed from different perspectives:
-                            <ul class="mt-3 space-y-2 list-none text-slate-300">
-                                <li><i class="fas fa-circle text-[6px] text-indigo-400 mr-2 align-middle"></i> <strong>For the Customer:</strong> It is their Total Spending.</li>
-                                <li><i class="fas fa-circle text-[6px] text-indigo-400 mr-2 align-middle"></i> <strong>For the Company:</strong> It is the Revenue earned.</li>
-                                <li><i class="fas fa-circle text-[6px] text-indigo-400 mr-2 align-middle"></i> <strong>For the Product:</strong> It is the Product Sales.</li>
-                            </ul>
+                    </section>
+
+                    {/* Projects Section */}
+                    <section id="projects" className="py-20 px-6 bg-slate-900 text-white">
+                        <div className="max-w-7xl mx-auto">
+                            <h2 className="text-3xl font-bold text-center mb-16">Real-Time Industry Projects</h2>
+                            <div className="grid md:grid-cols-3 gap-8 text-slate-900">
+                                {projects.map((proj, i) => (
+                                    <div key={i} className="bg-white p-8 rounded-lg space-y-4 shadow-xl border-t-4 border-cyan-500">
+                                        <div className="text-[10px] font-bold text-cyan-600 uppercase tracking-widest">{proj.type} Project</div>
+                                        <h4 className="text-xl font-bold">{proj.title}</h4>
+                                        <p className="text-sm text-slate-400 font-bold uppercase tracking-tight">Domain: {proj.domain}</p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </section>
 
-                <!-- Journey Section -->
-                <div class="py-12">
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                        <div class="p-4 glass rounded-xl">
-                            <div class="w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center mx-auto mb-3 text-indigo-400 font-bold">1</div>
-                            <p class="text-xs uppercase text-slate-500 mb-1">Entrance</p>
-                            <p class="text-sm font-bold">Customer walks in</p>
+                    {/* Videos Section */}
+                    <section id="videos" className="py-20 px-6">
+                        <div className="max-w-5xl mx-auto">
+                            <h2 className="text-3xl font-bold text-center mb-12">Training Previews</h2>
+                            <div className="grid md:grid-cols-2 gap-8">
+                                <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center group cursor-pointer border-2 border-dashed border-slate-200">
+                                    <Icon name="play" size={48} className="text-cyan-500 opacity-50 group-hover:opacity-100 transition-all" />
+                                </div>
+                                <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center border-2 border-dashed border-slate-200 text-slate-400 font-semibold">
+                                    [Demo: Data Warehousing Concepts]
+                                </div>
+                            </div>
                         </div>
-                        <div class="p-4 glass rounded-xl">
-                            <div class="w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center mx-auto mb-3 text-indigo-400 font-bold">2</div>
-                            <p class="text-xs uppercase text-slate-500 mb-1">Intent</p>
-                            <p class="text-sm font-bold">Buy Products</p>
+                    </section>
+
+                    {/* Eligibility & Fees */}
+                    <section id="eligibility" className="py-20 px-6 bg-slate-50">
+                        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+                            <div className="bg-white p-10 rounded-lg border border-slate-100">
+                                <h3 className="text-2xl font-bold mb-8">Who should do the Data Analytics course?</h3>
+                                <ul className="space-y-6">
+                                    {['Fresh Graduates from any stream', 'Professionals seeking career shift', 'Aspiring Data Analysts', 'IT Professionals upskilling'].map((text, i) => (
+                                        <li key={i} className="flex items-start space-x-4 text-slate-600">
+                                            <Icon name="user-check" size={20} className="text-cyan-500 mt-0.5" />
+                                            <span className="font-semibold">{text}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div id="fees" className="bg-white p-10 rounded-lg border-2 border-cyan-500 shadow-2xl text-center">
+                                <h3 className="text-2xl font-bold mb-4">Program Fees</h3>
+                                <p className="text-5xl font-extrabold text-slate-900 mb-2">₹40,000</p>
+                                <p className="text-slate-400 text-sm mb-8 font-medium">Inclusive of all taxes, tools, and placement support.</p>
+                                <ul className="text-left space-y-4 mb-8 text-sm font-semibold text-slate-600 max-w-xs mx-auto">
+                                    <li className="flex items-center space-x-2">
+                                        <Icon name="check" size={16} className="text-green-500" />
+                                        <span>7 Months cohort learning</span>
+                                    </li>
+                                    <li className="flex items-center space-x-2">
+                                        <Icon name="check" size={16} className="text-green-500" />
+                                        <span>Job Assistance provided</span>
+                                    </li>
+                                </ul>
+                                <button className="w-full bg-cyan-500 text-white py-4 rounded font-bold hover:bg-cyan-600 transition-all shadow-lg shadow-cyan-100">Apply Now</button>
+                            </div>
                         </div>
-                        <div class="p-4 glass rounded-xl">
-                            <div class="w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center mx-auto mb-3 text-indigo-400 font-bold">3</div>
-                            <p class="text-xs uppercase text-slate-500 mb-1">Execution</p>
-                            <p class="text-sm font-bold">Order is Placed</p>
+                    </section>
+
+                    {/* Students Feedback Placeholders */}
+                    <section className="py-24 px-6 bg-white">
+                        <div className="max-w-7xl mx-auto text-center">
+                            <h2 className="text-3xl font-bold text-center mb-16">Hearing from our Students</h2>
+                            <div className="grid md:grid-cols-3 gap-8 text-center">
+                                {[1, 2, 3].map(i => (
+                                    <div key={i} className="bg-slate-50 p-12 rounded-lg border border-slate-100 text-slate-400 font-bold uppercase tracking-widest flex items-center justify-center h-40">
+                                        Student Feedback Box
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <div class="p-4 glass rounded-xl">
-                            <div class="w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center mx-auto mb-3 text-indigo-400 font-bold">4</div>
-                            <p class="text-xs uppercase text-slate-500 mb-1">Result</p>
-                            <p class="text-sm font-bold">Amount Paid</p>
+                    </section>
+
+                    {/* FAQs */}
+                    <section className="py-24 px-6 bg-slate-50 border-t border-slate-100">
+                        <div className="max-w-3xl mx-auto">
+                            <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+                            <div className="space-y-4">
+                                {[
+                                    { q: "Is job assistance provided?", a: "Yes, we provide resume building, mock interviews, and direct placement assistance for all eligible candidates." },
+                                    { q: "Do I need coding background?", a: "No, we start from the very basics of data logic and warehousing concepts." },
+                                    { q: "What is the fee structure?", a: "The total fee is ₹40,000 inclusive of all training materials and tool access." }
+                                ].map((faq, i) => (
+                                    <details key={i} className="group bg-white border border-slate-100 rounded-md">
+                                        <summary className="flex justify-between items-center p-5 cursor-pointer font-bold text-slate-700 text-sm transition-colors hover:bg-slate-50">
+                                            {faq.q}
+                                            <Icon name="plus" size={18} className="text-slate-300 group-open:rotate-45 transition-transform" />
+                                        </summary>
+                                        <p className="p-5 pt-0 text-sm text-slate-500 leading-relaxed font-medium">{faq.a}</p>
+                                    </details>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </section>
 
-                <!-- Core Insight -->
-                <div class="flex flex-col items-end">
-                    <div class="bg-indigo-600/10 p-6 rounded-2xl rounded-tr-none border border-indigo-500/30 max-w-[85%]">
-                        <p class="text-slate-200 leading-relaxed italic">
-                            "Exactly. If you use COALESCE on a row that isn't there, it does nothing. <strong>COALESCE cannot create a row out of thin air.</strong> You use the <strong>LEFT JOIN</strong> to act as the 'Front Door' of your report."
-                        </p>
-                    </div>
+                    {/* Footer */}
+                    <footer className="py-20 bg-slate-900 text-white px-6">
+                        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 text-center md:text-left">
+                            <div className="space-y-4">
+                                <div className="font-extrabold text-2xl tracking-tight uppercase">The Institute</div>
+                                <p className="text-slate-500 text-sm leading-relaxed font-medium">Modern training for the 2026 Augmented Data Analyst. Logic first, AI fast.</p>
+                            </div>
+                            <div className="space-y-4 text-sm font-bold text-slate-400">
+                                <h5 className="text-white uppercase tracking-widest text-xs">Quick Links</h5>
+                                <a href="#" className="block hover:text-cyan-400 transition-colors">About Us</a>
+                                <a href="#" className="block hover:text-cyan-400 transition-colors">Terms & Conditions</a>
+                                <a href="#" className="block hover:text-cyan-400 transition-colors">Privacy Policy</a>
+                            </div>
+                            <div className="space-y-4 text-sm font-bold text-slate-400">
+                                <h5 className="text-white uppercase tracking-widest text-xs">Contact</h5>
+                                <p>Email: admissions@theinstitute.ai</p>
+                                <p>Phone: +91 966707XXXX</p>
+                            </div>
+                        </div>
+                    </footer>
                 </div>
+            );
+        };
 
-            </div>
-        </section>
-
-        <!-- Technical Solution -->
-        <section class="mb-32 bg-slate-900 rounded-3xl p-8 md:p-12 border border-slate-800 relative">
-            <div class="absolute top-0 right-0 p-8 text-slate-800 text-6xl opacity-20"><i class="fas fa-code"></i></div>
-            <div class="max-w-4xl">
-                <h2 class="text-3xl font-bold mb-8">The <span class="text-indigo-400">Technical</span> Execution</h2>
-                <p class="text-slate-400 mb-8">This is how the physical journey and the math come together in optimized SQL.</p>
-                
-                <div class="relative group">
-                    <div class="absolute -top-3 right-4 px-3 py-1 bg-slate-800 border border-slate-700 rounded text-xs text-slate-400 mono z-10">SQL</div>
-                    <pre class="mono text-sm leading-relaxed text-indigo-300">
-<span class="text-indigo-500">SELECT</span> 
-    c.CompanyName, 
-    <span class="text-slate-500">-- THE MATH: (Price * Qty)</span>
-    <span class="text-slate-500">-- THE FORMATTING: COALESCE turns "Missing Payment" into 0</span>
-    <span class="text-emerald-400">COALESCE</span>(<span class="text-emerald-400">SUM</span>(od.UnitPrice * od.Quantity), <span class="text-pink-400">0</span>) <span class="text-indigo-500">AS</span> TotalSpending
-<span class="text-indigo-500">FROM</span> Customers c
-<span class="text-slate-500">-- THE VISIBILITY: LEFT JOIN ensures customers with NO orders still appear</span>
-<span class="text-indigo-500">LEFT JOIN</span> Orders o <span class="text-indigo-500">ON</span> c.CustomerID = o.CustomerID
-<span class="text-indigo-500">LEFT JOIN</span> <span class="text-slate-300">"Order Details"</span> od <span class="text-indigo-500">ON</span> o.OrderID = od.OrderID
-<span class="text-indigo-500">GROUP BY</span> c.CompanyName
-<span class="text-indigo-500">ORDER BY</span> TotalSpending <span class="text-indigo-500">DESC</span>;</pre>
-                </div>
-            </div>
-        </section>
-
-        <!-- Key Takeaways -->
-        <section class="grid md:grid-cols-3 gap-8">
-            <div class="glass p-8 rounded-2xl card-hover transition-all duration-300">
-                <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-400 mb-6">
-                    <i class="fas fa-layer-group"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">The Concept</h3>
-                <p class="text-sm text-slate-400 leading-relaxed">Total Spending = Revenue = Product Sales. The math remains <code>Price * Qty</code> regardless of who asks.</p>
-            </div>
-            <div class="glass p-8 rounded-2xl card-hover transition-all duration-300">
-                <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-400 mb-6">
-                    <i class="fas fa-project-diagram"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">The Join Rule</h3>
-                <p class="text-sm text-slate-400 leading-relaxed">No purchase = No record in the Orders table. <code>LEFT JOIN</code> is mandatory to keep them in view.</p>
-            </div>
-            <div class="glass p-8 rounded-2xl card-hover transition-all duration-300">
-                <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-400 mb-6">
-                    <i class="fas fa-paint-brush"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">The Toolset</h3>
-                <p class="text-sm text-slate-400 leading-relaxed"><code>JOIN</code> handles who shows up at the door; <code>COALESCE</code> handles how their empty hands are displayed.</p>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="py-20 border-t border-slate-800 bg-[#01040f]">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="flex items-center justify-center gap-2 mb-6">
-                <div class="w-6 h-6 bg-indigo-600 rounded flex items-center justify-center">
-                    <i class="fas fa-database text-white text-[10px]"></i>
-                </div>
-                <span class="font-bold text-lg uppercase tracking-tight">Career<span class="text-indigo-500">247</span></span>
-            </div>
-            <p class="text-slate-500 text-sm mb-8">Part of the Data Analytics Mastery Program. &copy; 2026 Career247. All rights reserved.</p>
-            <div class="flex justify-center gap-6 text-slate-400">
-                <a href="#" class="hover:text-white transition-colors"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="hover:text-white transition-colors"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-    </footer>
-
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
 </body>
 </html>
