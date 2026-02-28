@@ -17,9 +17,8 @@
         .tool-card { border-radius: 8px; transition: transform 0.2s; }
         .tool-card:hover { transform: translateY(-4px); }
         
-        /* Custom Scrollbar for the curriculum content */
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 10px; }
     </style>
 </head>
@@ -54,9 +53,11 @@
             const syllabusData = [
                 {
                     id: 0,
-                    title: "Module 1: Excel Mastery",
-                    subtitle: "Introduction to Data Analysis with Excel",
+                    title: "Data Analytics with Excel",
+                    lectures: 8,
+                    hours: 24,
                     content: [
+                        "Introduction to Data Analysis with Excel",
                         "Excel Interface, Data Types & Formatting",
                         "Excel Functions (Basic to Advanced)",
                         "Logical Functions (IF, IFS, Nested IF)",
@@ -78,8 +79,9 @@
                 },
                 {
                     id: 1,
-                    title: "Module 2: SQL Architecture",
-                    subtitle: "Data Wrangling with SQL",
+                    title: "Data Wrangling with SQL",
+                    lectures: 11,
+                    hours: 33,
                     content: [
                         "Introduction to Databases & RDBMS Concepts",
                         "SQL Environment Setup & Data Import",
@@ -103,8 +105,9 @@
                 },
                 {
                     id: 2,
-                    title: "Module 3: Python Engine",
-                    subtitle: "Python for Data Analytics",
+                    title: "Python for Data Analytics",
+                    lectures: 12,
+                    hours: 42,
                     content: [
                         "Introduction to Python & Environment Setup",
                         "Variables, Data Types & Operators",
@@ -128,8 +131,9 @@
                 },
                 {
                     id: 3,
-                    title: "Module 4: Statistics & logic",
-                    subtitle: "Applied Statistical Analysis",
+                    title: "Statistics & Data Exploration",
+                    lectures: 11,
+                    hours: 33,
                     content: [
                         "Descriptive Statistics – Mean, Median, Mode",
                         "Variance & Standard Deviation",
@@ -148,8 +152,9 @@
                 },
                 {
                     id: 4,
-                    title: "Module 5: BI & Visuals",
-                    subtitle: "Business Intelligence with Power BI",
+                    title: "Power BI for Business Intelligence",
+                    lectures: 8,
+                    hours: 24,
                     content: [
                         "Introduction to Power BI & BI Concepts",
                         "Data Connection & Data Transformation",
@@ -169,8 +174,9 @@
                 },
                 {
                     id: 5,
-                    title: "Module 6: GenAI for Analysts",
-                    subtitle: "Generative AI in Analytics Workflow",
+                    title: "Gen AI for Data Professionals",
+                    lectures: 5,
+                    hours: 15,
                     content: [
                         "Introduction to Generative AI in Analytics",
                         "Prompt Engineering for Data Tasks",
@@ -188,8 +194,9 @@
                 },
                 {
                     id: 6,
-                    title: "Module 7: Career Readiness",
-                    subtitle: "Aptitude & Soft Skills Training",
+                    title: "Career Readiness",
+                    lectures: 20,
+                    hours: 60,
                     content: [
                         "Aptitude Training- Core Quant + Smart Arithmetic",
                         "Aptitude Training - Visual + Verbal Reasoning Mash-up",
@@ -213,7 +220,6 @@
 
             return (
                 <div className="min-h-screen">
-                    {/* Header Ribbon */}
                     <nav className="fixed w-full z-50 bg-white border-b border-slate-100 h-20 flex items-center shadow-sm">
                         <div className="max-w-7xl mx-auto px-6 w-full flex justify-between items-center">
                             <div className="flex items-center space-x-2">
@@ -230,22 +236,16 @@
                         </div>
                     </nav>
 
-                    {/* Sticky Sub-Navigation */}
                     <div className="fixed top-20 w-full z-40 bg-slate-50 border-b border-slate-200 hidden md:block">
                         <div className="max-w-5xl mx-auto flex justify-between px-4">
                             {['About', 'Syllabus', 'Tools', 'Projects', 'Videos', 'Eligibility', 'Fees'].map((tab) => (
-                                <a 
-                                    key={tab}
-                                    href={`#${tab.toLowerCase()}`}
-                                    className="py-4 text-sm font-bold text-slate-500 hover:text-cyan-500 border-b-2 border-transparent hover:border-cyan-500 transition-all"
-                                >
+                                <a key={tab} href={`#${tab.toLowerCase()}`} className="py-4 text-sm font-bold text-slate-500 hover:text-cyan-500 border-b-2 border-transparent hover:border-cyan-500 transition-all">
                                     {tab}
                                 </a>
                             ))}
                         </div>
                     </div>
 
-                    {/* Hero Section */}
                     <header id="about" className="pt-48 pb-24 px-6 bg-slate-50/50">
                         <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
                             <div className="space-y-8 text-center lg:text-left">
@@ -253,7 +253,7 @@
                                     Job-Ready Certification Program
                                 </div>
                                 <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-slate-900">
-                                    Certification in <span className="text-cyan-500 underline decoration-cyan-100 underline-offset-8">Augmented Data Analytics</span>
+                                    Certification in <span className="text-cyan-500">Augmented Data Analytics</span>
                                 </h1>
                                 <p className="text-lg text-slate-500 max-w-xl font-medium leading-relaxed mx-auto lg:mx-0">
                                     Master Data Warehousing, SQL, and Python with an AI-Ready approach. Get comprehensive career assistance and learn from industry veterans.
@@ -273,8 +273,6 @@
                                     <button className="text-slate-900 font-bold underline">Download Brochure</button>
                                 </div>
                             </div>
-
-                            {/* Enrollment Form */}
                             <div className="bg-white p-8 border border-slate-100 rounded-lg form-shadow max-w-md ml-auto w-full">
                                 <h3 className="text-xl font-bold mb-2 text-slate-900">Join the Program</h3>
                                 <p className="text-sm text-slate-400 mb-6 font-medium">Start your professional journey today</p>
@@ -292,63 +290,66 @@
                         </div>
                     </header>
 
-                    {/* Interactive Curriculum Section - 150% Height Enhancement */}
-                    <section id="syllabus" className="py-32 px-6 bg-white border-y border-slate-100">
+                    {/* Job Ready Curriculum Section - Light & Modern */}
+                    <section id="syllabus" className="py-24 px-6 bg-slate-50/30">
                         <div className="max-w-7xl mx-auto">
                             <h2 className="text-3xl font-extrabold text-center mb-16 text-slate-900">Job-Ready Data Analytics Curriculum</h2>
                             
-                            <div className="flex flex-col lg:flex-row gap-1 border-4 border-slate-900 bg-slate-900 min-h-[900px]">
-                                {/* Left Side: Modules */}
-                                <div className="lg:w-1/3 bg-white flex flex-col">
+                            <div className="flex flex-col lg:flex-row gap-6 min-h-[600px]">
+                                {/* Left Side Modules */}
+                                <div className="lg:w-1/3 flex flex-col space-y-3">
                                     {syllabusData.map((mod, idx) => (
                                         <button
                                             key={mod.id}
                                             onClick={() => setActiveModule(idx)}
-                                            className={`flex flex-col items-start p-8 text-left transition-all border-b border-slate-100 h-full justify-center ${activeModule === idx ? 'bg-cyan-500 text-white' : 'hover:bg-slate-50 text-slate-700'}`}
+                                            className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModule === idx ? 'bg-cyan-500 border-cyan-500 text-white shadow-lg shadow-cyan-100' : 'bg-white border-slate-100 text-slate-600 hover:border-cyan-200'}`}
                                         >
-                                            <span className={`text-[10px] font-black uppercase tracking-widest mb-2 ${activeModule === idx ? 'text-white' : 'text-cyan-500'}`}>Step 0{idx + 1}</span>
-                                            <span className="text-lg font-bold leading-tight">{mod.title}</span>
+                                            <span className="text-md">{mod.title}</span>
+                                            <Icon name="chevron-right" size={16} className={`transition-transform ${activeModule === idx ? 'translate-x-1 opacity-100' : 'opacity-0'}`} />
                                         </button>
                                     ))}
                                 </div>
 
-                                {/* Right Side: Content */}
-                                <div className="lg:w-2/3 bg-white p-12 lg:p-16 flex flex-col">
-                                    <div className="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-8">
-                                        <div className="space-y-2">
-                                            <h3 className="text-4xl font-black text-slate-900 leading-tight">{syllabusData[activeModule].subtitle}</h3>
-                                            <div className="flex items-center space-x-2 text-cyan-500 font-bold uppercase text-[11px] tracking-[0.2em]">
-                                                <Icon name="award" size={14} />
-                                                <span>Professional Benchmark</span>
+                                {/* Right Side Content */}
+                                <div className="lg:w-2/3 bg-white p-10 rounded-2xl border border-slate-100 shadow-xl shadow-slate-200/50 flex flex-col">
+                                    <div className="mb-8 pb-6 border-b border-slate-50 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                        <div className="space-y-1">
+                                            <span className="text-cyan-500 font-bold uppercase text-[11px] tracking-widest">Module 0{activeModule + 1}</span>
+                                            <div className="flex items-center gap-4 mt-2">
+                                                <div className="w-10 h-10 rounded-full bg-cyan-50 flex items-center justify-center">
+                                                    <Icon name="play-circle" size={24} className="text-cyan-500" />
+                                                </div>
+                                                <div className="flex flex-col">
+                                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-tighter">Lectures: {syllabusData[activeModule].lectures} • Hours: {syllabusData[activeModule].hours}</span>
+                                                    <h3 className="text-2xl font-bold text-slate-900">{syllabusData[activeModule].title}</h3>
+                                                </div>
                                             </div>
                                         </div>
-                                        <button className="flex items-center space-x-2 bg-slate-900 text-white px-6 py-3 rounded text-xs font-bold uppercase tracking-widest self-start md:self-center hover:bg-cyan-500 transition-colors">
-                                            <Icon name="download" size={16} />
-                                            <span>Download Brochure</span>
+                                        <button className="flex items-center space-x-2 bg-slate-50 text-slate-600 px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-cyan-500 hover:text-white transition-all">
+                                            <Icon name="download" size={14} />
+                                            <span>Brochure</span>
                                         </button>
                                     </div>
 
                                     <div className="flex-grow overflow-y-auto custom-scrollbar pr-4">
-                                        <div className="grid md:grid-cols-2 gap-x-12 gap-y-6">
+                                        <div className="grid md:grid-cols-2 gap-x-10 gap-y-4">
                                             {syllabusData[activeModule].content.map((bullet, i) => (
-                                                <div key={i} className="flex items-start space-x-4 group">
-                                                    <div className="w-6 h-6 rounded-full bg-cyan-50 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-cyan-500 transition-colors">
-                                                        <Icon name="check" size={14} className="text-cyan-500 group-hover:text-white transition-colors" />
-                                                    </div>
-                                                    <span className="text-[15px] font-medium text-slate-600 group-hover:text-slate-900 transition-colors">{bullet}</span>
+                                                <div key={i} className="flex items-start space-x-3 group">
+                                                    <Icon name="check-circle" size={14} className="text-cyan-400 mt-1 flex-shrink-0" />
+                                                    <span className="text-[14px] font-medium text-slate-500 leading-tight group-hover:text-slate-900 transition-colors">{bullet}</span>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
                                     
-                                    <div className="mt-12 pt-8 border-t border-slate-100 flex items-center justify-between text-slate-400">
-                                        <div className="flex items-center space-x-2">
-                                            <Icon name="layers" size={20} />
-                                            <span className="text-xs font-bold uppercase tracking-widest">Industry First Curriculum</span>
+                                    <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
+                                        <div className="flex items-center space-x-2 text-slate-400">
+                                            <Icon name="layers" size={16} />
+                                            <span className="text-[10px] font-bold uppercase tracking-widest">Industry First Curriculum</span>
                                         </div>
-                                        <div className="flex items-center space-x-2">
-                                            <Icon name="cpu" size={20} className="text-cyan-500" />
-                                            <span className="text-xs font-bold uppercase tracking-widest text-slate-900 italic">AI Ready Training</span>
+                                        <div className="flex items-center space-x-2 text-cyan-500/80">
+                                            <Icon name="cpu" size={16} />
+                                            <span className="text-[10px] font-bold uppercase tracking-widest italic">AI Powered Workflow</span>
                                         </div>
                                     </div>
                                 </div>
@@ -356,7 +357,6 @@
                         </div>
                     </section>
 
-                    {/* Tools Section */}
                     <section id="tools" className="py-24 px-6 bg-slate-50">
                         <div className="max-w-7xl mx-auto">
                             <h2 className="text-3xl font-bold text-center mb-16 text-slate-900">Modern Stack Industry Standard Tools</h2>
@@ -371,7 +371,6 @@
                         </div>
                     </section>
 
-                    {/* Projects Section */}
                     <section id="projects" className="py-20 px-6 bg-slate-900 text-white">
                         <div className="max-w-7xl mx-auto">
                             <h2 className="text-3xl font-bold text-center mb-16">Real-Time Industry Projects</h2>
@@ -387,7 +386,6 @@
                         </div>
                     </section>
 
-                    {/* Eligibility & Fees */}
                     <section id="eligibility" className="py-20 px-6 bg-white">
                         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
                             <div className="bg-white p-10 rounded-lg border border-slate-100">
@@ -420,7 +418,6 @@
                         </div>
                     </section>
 
-                    {/* Students Feedback Placeholders */}
                     <section className="py-24 px-6 bg-white">
                         <div className="max-w-7xl mx-auto text-center">
                             <h2 className="text-3xl font-bold text-center mb-16">Hearing from our Students</h2>
@@ -434,7 +431,6 @@
                         </div>
                     </section>
 
-                    {/* FAQs */}
                     <section className="py-24 px-6 bg-slate-50 border-t border-slate-100">
                         <div className="max-w-3xl mx-auto">
                             <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
@@ -456,7 +452,6 @@
                         </div>
                     </section>
 
-                    {/* Footer */}
                     <footer className="py-20 bg-slate-900 text-white px-6">
                         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 text-center md:text-left">
                             <div className="space-y-4">
