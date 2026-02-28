@@ -211,12 +211,6 @@
                 }
             ];
 
-            const projects = [
-                { title: 'Financial KPI Dashboard', domain: 'Finance', type: 'Capstone' },
-                { title: 'UPI Transaction Analysis', domain: 'Retail', type: 'Industry' },
-                { title: 'Black Friday Sales Forecasting', domain: 'SaaS', type: 'Real-time' }
-            ];
-
             return (
                 <div className="min-h-screen">
                     <nav className="fixed w-full z-50 bg-white border-b border-slate-100 h-20 flex items-center shadow-sm">
@@ -289,7 +283,7 @@
                         </div>
                     </header>
 
-                    {/* Job Ready Curriculum Section - Flat, Modern & Distinctive Background */}
+                    {/* Job Ready Curriculum Section */}
                     <section id="syllabus" className="py-24 px-6 bg-slate-50 border-y border-slate-200">
                         <div className="max-w-7xl mx-auto">
                             <h2 className="text-3xl font-extrabold text-center mb-16 text-slate-900">Job-Ready Data Analytics Curriculum</h2>
@@ -355,9 +349,10 @@
                         </div>
                     </section>
 
+                    {/* Tools Section */}
                     <section id="tools" className="py-24 px-6 bg-white">
-                        <div className="max-w-7xl mx-auto">
-                            <h2 className="text-3xl font-bold text-center mb-16 text-slate-900">Modern Stack Industry Standard Tools</h2>
+                        <div className="max-w-7xl mx-auto text-center">
+                            <h2 className="text-3xl font-bold mb-16 text-slate-900">Modern Stack Industry Standard Tools</h2>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                                 {tools.map((tool, i) => (
                                     <div key={i} className={`${tool.color} tool-card p-12 flex flex-col items-center justify-center space-y-5 border border-slate-50`}>
@@ -369,69 +364,131 @@
                         </div>
                     </section>
 
-                    <section id="projects" className="py-20 px-6 bg-slate-900 text-white">
+                    {/* Projects Section - 6 Boxes & Light Background */}
+                    <section id="projects" className="py-24 px-6 bg-slate-50">
                         <div className="max-w-7xl mx-auto">
-                            <h2 className="text-3xl font-bold text-center mb-16">Real-Time Industry Projects</h2>
-                            <div className="grid md:grid-cols-3 gap-8 text-slate-900">
-                                {projects.map((proj, i) => (
-                                    <div key={i} className="bg-white p-8 rounded-lg space-y-4 border-t-4 border-cyan-500">
-                                        <div className="text-[10px] font-bold text-cyan-600 uppercase tracking-widest">{proj.type} Project</div>
-                                        <h4 className="text-xl font-bold">{proj.title}</h4>
-                                        <p className="text-sm text-slate-400 font-bold uppercase tracking-tight">Domain: {proj.domain}</p>
+                            <h2 className="text-3xl font-bold text-center mb-16 text-slate-900">6+ Real-Time Industry Projects</h2>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {[1, 2, 3, 4, 5, 6].map((i) => (
+                                    <div key={i} className="bg-white rounded-xl overflow-hidden border border-slate-200">
+                                        <div className="aspect-video bg-slate-100 flex items-center justify-center text-slate-300 font-bold uppercase text-[10px] tracking-widest">
+                                            Project Image Placeholder
+                                        </div>
+                                        <div className="p-6 space-y-2">
+                                            <div className="h-4 bg-slate-50 w-3/4 rounded"></div>
+                                            <div className="h-3 bg-slate-50 w-full rounded"></div>
+                                            <div className="h-3 bg-slate-50 w-full rounded"></div>
+                                            <div className="h-3 bg-slate-50 w-2/3 rounded"></div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </section>
 
-                    <section id="eligibility" className="py-20 px-6 bg-white">
-                        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
-                            <div className="bg-white p-10 rounded-lg border border-slate-100">
-                                <h3 className="text-2xl font-bold mb-8">Who should do the Data Analytics course?</h3>
-                                <ul className="space-y-6">
-                                    {['Fresh Graduates from any stream', 'Professionals seeking career shift', 'Aspiring Data Analysts', 'IT Professionals upskilling'].map((text, i) => (
-                                        <li key={i} className="flex items-start space-x-4 text-slate-600">
-                                            <Icon name="user-check" size={20} className="text-cyan-500 mt-0.5" />
-                                            <span className="font-semibold">{text}</span>
-                                        </li>
-                                    ))}
-                                </ul>
+                    {/* Videos Section - Overviews & Demo Videos */}
+                    <section id="videos" className="py-24 px-6 bg-white">
+                        <div className="max-w-7xl mx-auto">
+                            <div className="flex justify-between items-center mb-12">
+                                <h2 className="text-3xl font-bold text-slate-900">Program Overview & Demo Videos</h2>
+                                <div className="flex space-x-3">
+                                    <button className="p-3 border border-slate-200 rounded-full hover:bg-cyan-50 hover:border-cyan-200 transition-all text-slate-400 hover:text-cyan-500">
+                                        <Icon name="arrow-left" size={20} />
+                                    </button>
+                                    <button className="p-3 border border-slate-200 rounded-full hover:bg-cyan-50 hover:border-cyan-200 transition-all text-slate-400 hover:text-cyan-500">
+                                        <Icon name="arrow-right" size={20} />
+                                    </button>
+                                </div>
                             </div>
-                            <div id="fees" className="bg-white p-10 rounded-lg border-2 border-cyan-500 text-center">
-                                <h3 className="text-2xl font-bold mb-4">Program Fees</h3>
-                                <p className="text-5xl font-extrabold text-slate-900 mb-2">₹40,000</p>
-                                <p className="text-slate-400 text-sm mb-8 font-medium">Inclusive of all taxes, tools, and placement support.</p>
-                                <ul className="text-left space-y-4 mb-8 text-sm font-semibold text-slate-600 max-w-xs mx-auto">
-                                    <li className="flex items-center space-x-2">
-                                        <Icon name="check" size={16} className="text-green-500" />
-                                        <span>7 Months cohort learning</span>
-                                    </li>
-                                    <li className="flex items-center space-x-2">
-                                        <Icon name="check" size={16} className="text-green-500" />
-                                        <span>Job Assistance provided</span>
-                                    </li>
-                                </ul>
-                                <button className="w-full bg-cyan-500 text-white py-4 rounded font-bold hover:bg-cyan-600 transition-all">Apply Now</button>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {[
+                                    "Curriculum Walkthrough",
+                                    "Data Analytics Masterclass",
+                                    "Student Success Stories",
+                                    "Career Roadmap 2026"
+                                ].map((title, i) => (
+                                    <div key={i} className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center group cursor-pointer relative overflow-hidden border border-slate-200">
+                                        <div className="absolute inset-0 bg-slate-900/5 group-hover:bg-slate-900/10 transition-all"></div>
+                                        <Icon name="play" size={40} className="text-cyan-500 opacity-80 group-hover:scale-110 group-hover:opacity-100 transition-all z-10" />
+                                        <div className="absolute bottom-4 left-4 text-slate-900 font-bold text-[10px] uppercase tracking-wider z-10">{title}</div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </section>
 
+                    {/* Eligibility & Fees Section */}
+                    <section id="eligibility" className="py-24 px-6 bg-slate-50">
+                        <div className="max-w-7xl mx-auto">
+                             <div className="grid lg:grid-cols-2 gap-12 items-start">
+                                {/* Left Column: Program Value */}
+                                <div className="space-y-8 bg-white p-10 rounded-2xl border border-slate-200">
+                                    <h3 className="text-2xl font-bold text-slate-900 mb-6">Program Benefits & Inclusions</h3>
+                                    <div className="grid gap-6">
+                                        {[
+                                            { title: "7-Month Skill Cohort", desc: "Intensive 290+ hours of live training and hands-on practice." },
+                                            { title: "Career Assistance & Mentorship", desc: "Personalized resume building, interview prep, and placement guidance." },
+                                            { title: "Full Skill Library Access", desc: "Lifetime access to our repository of analytical tools and recorded lectures." },
+                                            { title: "Bilingual Delivery", desc: "Sessions delivered in English and Hindi for maximum accessibility." },
+                                            { title: "Target Audience", desc: "Perfect for fresh graduates and career switchers from any background." }
+                                        ].map((item, i) => (
+                                            <div key={i} className="flex items-start space-x-4">
+                                                <div className="bg-cyan-50 p-2 rounded-lg">
+                                                    <Icon name="check" size={18} className="text-cyan-600" />
+                                                </div>
+                                                <div>
+                                                    <h5 className="font-bold text-slate-800 text-sm uppercase tracking-tight">{item.title}</h5>
+                                                    <p className="text-slate-500 text-sm mt-1">{item.desc}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Right Column: Fees & Payment */}
+                                <div id="fees" className="bg-white p-10 rounded-2xl border-2 border-cyan-500 space-y-8">
+                                    <div className="text-center pb-6 border-b border-slate-100">
+                                        <span className="text-xs font-bold text-cyan-600 uppercase tracking-[0.2em]">Program Investment</span>
+                                        <h3 className="text-5xl font-extrabold text-slate-900 mt-2">₹40,000</h3>
+                                        <p className="text-slate-400 text-xs mt-2 font-medium uppercase tracking-wider">Inclusive of all taxes</p>
+                                    </div>
+                                    
+                                    <div className="space-y-4">
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Promotion Code</label>
+                                            <div className="flex space-x-2">
+                                                <input type="text" placeholder="Enter Code" className="flex-grow p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:border-cyan-500 outline-none" />
+                                                <button className="bg-slate-900 text-white px-5 py-2 rounded-lg font-bold text-[10px] uppercase tracking-widest">Apply</button>
+                                            </div>
+                                        </div>
+                                        <button className="w-full bg-cyan-500 text-white py-5 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-lg shadow-cyan-100">
+                                            Apply & Pay Now
+                                        </button>
+                                        <p className="text-center text-[10px] text-slate-400 font-medium">Safe & Secure Payment Processing</p>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </section>
+
+                    {/* Students Feedback Placeholders */}
                     <section className="py-24 px-6 bg-white">
                         <div className="max-w-7xl mx-auto text-center">
                             <h2 className="text-3xl font-bold text-center mb-16">Hearing from our Students</h2>
                             <div className="grid md:grid-cols-3 gap-8 text-center">
                                 {[1, 2, 3].map(i => (
-                                    <div key={i} className="bg-slate-50 p-12 rounded-lg border border-slate-100 text-slate-400 font-bold uppercase tracking-widest flex items-center justify-center h-40">
-                                        Student Feedback Box
+                                    <div key={i} className="bg-slate-50 p-12 rounded-lg border border-slate-100 text-slate-400 font-bold uppercase tracking-widest flex items-center justify-center h-40 text-xs">
+                                        Student Feedback Placeholder
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </section>
 
+                    {/* FAQs */}
                     <section className="py-24 px-6 bg-slate-50 border-t border-slate-100">
                         <div className="max-w-3xl mx-auto">
-                            <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+                            <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">Frequently Asked Questions</h2>
                             <div className="space-y-4">
                                 {[
                                     { q: "Is job assistance provided?", a: "Yes, we provide resume building, mock interviews, and direct placement assistance for all eligible candidates." },
