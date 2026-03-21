@@ -1,0 +1,339 @@
+Data Driven Model
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Data Pilot | Professional Certification Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- The Engine: This file will load all JSON data -->
+    <script src="core-layout.js" type="text/babel"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; color: #334155; }
+        section { scroll-margin-top: 120px; }
+        .transition-all { transition: all 0.3s ease; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 10px; }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
+        
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #06b6d4; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+        .gear-large { animation: spin 8s linear infinite; transform-origin: center; }
+        .gear-small { animation: spin-reverse 4s linear infinite; transform-origin: center; }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Static HTML Fallback: This shows instantly if JS/JSON fails or is loading -->
+    <div id="root">
+        <div style="height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; background-color: #f8fafc; text-align: center;">
+            <div style="max-width: 448px; width: 100%;">
+                <!-- Logo Block -->
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 28px;">
+                    <div style="width: 52px; height: 52px; background-color: #06b6d4; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.2);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+                    </div>
+                    <div style="display: flex; flex-direction: column; text-align: left; line-height: 1;">
+                        <span style="font-weight: 800; font-size: 22px; color: #0f172a; margin-bottom: 4px;">The Data Pilot</span>
+                        <span style="font-size: 13px; font-weight: 600; color: #06b6d4;">Logic-First. AI-Fast.</span>
+                    </div>
+                </div>
+
+                <div style="background-color: white; padding: 30px; border-radius: 40px; border: 1px solid #e2e8f0; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);">
+                    <!-- Gears Container: Larger, together, and no background circle -->
+                    <div style="width: 100px; height: 80px; margin: 0 auto 32px auto; position: relative;">
+                        <!-- Large Gear -->
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; top: 0; left: 0;" class="gear-large">
+                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <!-- Small Gear (Interlocking) -->
+                        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; bottom: 0; right: 0;" class="gear-small">
+                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                        </svg>
+                    </div>
+                    <!-- Headline: Not in caps -->
+                    <h2 style="font-weight: 800; font-size: 24px; margin-bottom: 12px; color: #0f172a; tracking: -0.01em;">System is temporarily down</h2>
+                    <p style="color: #64748b; font-weight: 500; margin-bottom: 36px; line-height: 1.6; font-size: 15px;">
+                        We are working on it and will be back online shortly
+                    </p>
+                    
+                    <button onclick="window.location.reload()" style="width: 100%; background-color: #06b6d4; color: white; padding: 22px; border-radius: 16px; font-weight: 800; font-size: 15px; text-transform: uppercase; letter-spacing: 0.1em; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.3);">
+                        Check Connection
+                    </button>
+                </div>
+                
+                <p style="margin-top: 18px; font-size: 12px; font-weight: 700; color: #94a3b8; letter-spacing: 0.05em;">Commitment to world-class data services and mentorship</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const App = () => {
+            const [isLoaded, setIsLoaded] = useState(false);
+            const [error, setError] = useState(null);
+            const [selectedProgramId, setSelectedProgramId] = useState(null);
+            const [activeModuleIdx, setActiveModuleIdx] = useState(0);
+            const [displayPrice, setDisplayPrice] = useState(0);
+            const [promoCode, setPromoCode] = useState('');
+
+            useEffect(() => {
+                const handleData = () => {
+                    try {
+                        if (window.SITE_DATA && window.SITE_DATA.isLoaded) {
+                            const { content } = window.SITE_DATA;
+                            
+                            if (!content || !content.programs) {
+                                throw new Error("Connection lost.");
+                            }
+
+                            const firstProgram = content.programs.find(p => p.active);
+                            setSelectedProgramId(firstProgram ? firstProgram.id : content.programs[0].id);
+                            setDisplayPrice(content.finance?.baseFee || 0);
+                            setIsLoaded(true);
+                        }
+                    } catch (err) {
+                        setError("We are working on it and will be back online shortly.");
+                        console.error("Initialization Error:", err);
+                    }
+                };
+
+                window.addEventListener('siteDataLoaded', handleData);
+                if (window.SITE_DATA && window.SITE_DATA.isLoaded) handleData();
+
+                const timer = setTimeout(() => {
+                    if (!window.SITE_DATA?.isLoaded) {
+                        setError("We are working on it and will be back online shortly.");
+                    }
+                }, 5000);
+
+                return () => {
+                    window.removeEventListener('siteDataLoaded', handleData);
+                    clearTimeout(timer);
+                };
+            }, []);
+
+            if (error) {
+                const brandName = window.SITE_DATA?.settings?.brand || "The Data Pilot";
+                const primaryColor = window.SITE_DATA?.settings?.theme?.primary || "cyan-500";
+
+                return (
+                    <div className="h-screen w-screen flex flex-col items-center justify-center p-6 bg-slate-50 text-center">
+                        <div className="max-w-md w-full">
+                            <div className="mb-10 text-center">
+                                <div className="flex items-center justify-center space-x-3" style={{ marginBottom: '28px' }}>
+                                    <div className={`w-12 h-12 bg-cyan-500 flex items-center justify-center rounded-lg shadow-lg`}>
+                                        <Icon name="plane" size={24} className="text-white" />
+                                    </div>
+                                    <div className="flex flex-col text-left leading-tight">
+                                        <span className="font-extrabold text-2xl text-slate-900 tracking-tight">{brandName}</span>
+                                        <span className="text-[13px] font-semibold text-cyan-500">Logic-First. AI-Fast.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="bg-white p-[30px] rounded-[2.5rem] border border-slate-200 shadow-xl">
+                                <div style={{ width: '100px', height: '80px', position: 'relative', margin: '0 auto 32px' }}>
+                                    <Icon name="settings" size={64} className="text-cyan-500 gear-large absolute top-0 left-0" />
+                                    <Icon name="settings" size={42} className="text-cyan-500 gear-small absolute bottom-0 right-0" />
+                                </div>
+                                <h2 className="text-2xl font-extrabold mb-4 text-slate-900 tracking-tight">System is temporarily down</h2>
+                                <p className="text-slate-500 font-medium mb-10 leading-relaxed text-sm">
+                                    {error}
+                                </p>
+                                
+                                <button 
+                                    onClick={() => window.location.reload()} 
+                                    className={`w-full bg-cyan-500 text-white py-5 rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-lg shadow-cyan-100`}
+                                >
+                                    Check Connection
+                                </button>
+                            </div>
+                            
+                            <p className="mt-[18px] text-[12px] font-bold text-slate-400">Commitment to world-class data services and mentorship</p>
+                        </div>
+                    </div>
+                );
+            }
+
+            if (!isLoaded || !selectedProgramId) {
+                return (
+                    <div className="h-screen w-screen flex flex-col items-center justify-center space-y-6 bg-white">
+                        <div className="loader"></div>
+                        <div className="flex flex-col items-center">
+                            <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-400 animate-pulse text-center">Initializing Systems</p>
+                            <span className="text-[8px] font-bold text-slate-300 uppercase tracking-widest mt-2">Logic-First. AI-Fast.</span>
+                        </div>
+                    </div>
+                );
+            }
+
+            const { settings, content, syllabus } = window.SITE_DATA;
+            const currentProgram = content.programs.find(p => p.id === selectedProgramId) || {};
+            const programSyllabus = (syllabus && syllabus[selectedProgramId]) ? syllabus[selectedProgramId] : [];
+            const programTools = (content.tools && content.tools[selectedProgramId]) ? content.tools[selectedProgramId] : [];
+            const programProjects = (content.projects && content.projects[selectedProgramId]) ? content.projects[selectedProgramId] : [];
+
+            const handleApplyPromo = () => {
+                const discount = content.finance?.coupons?.[promoCode.toUpperCase()];
+                if (discount) {
+                    const finalDiscount = discount < 1 ? content.finance.baseFee * discount : discount;
+                    setDisplayPrice(content.finance.baseFee - finalDiscount);
+                    alert("Promo Code Applied!");
+                } else {
+                    alert("Invalid Promo Code");
+                }
+            };
+
+            return (
+                <div className="min-h-screen">
+                    <Navbar />
+
+                    {/* HERO SECTION */}
+                    <header id="about" className="pt-48 pb-24 px-6 bg-slate-50/50">
+                        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+                            <div className="space-y-8 text-center lg:text-left">
+                                <div className="inline-block bg-cyan-50 text-cyan-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-widest">
+                                    Official Institute Portal
+                                </div>
+                                <h1 className="text-5xl md:text-7xl font-black leading-[0.95] tracking-tighter text-slate-900 uppercase">
+                                    {content.hero?.slogan?.split("Augmented")[0] || "Become the "}
+                                    <span className="text-cyan-500">Augmented</span>
+                                    {content.hero?.slogan?.split("Augmented")[1] || " Data Analyst"}
+                                </h1>
+                                <p className="text-xl text-slate-500 max-w-xl font-medium leading-relaxed mx-auto lg:mx-0">
+                                    {content.hero?.sub || "Logic architecture for professional integrity."}
+                                </p>
+                                
+                                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mt-4">
+                                    {content.programs?.map(p => (
+                                        <button 
+                                            key={p.id}
+                                            disabled={!p.active}
+                                            onClick={() => { setSelectedProgramId(p.id); setActiveModuleIdx(0); }}
+                                            className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest border transition-all 
+                                                ${selectedProgramId === p.id ? 'bg-slate-900 text-white border-slate-900 shadow-lg' : 'bg-white text-slate-400 border-slate-200 hover:border-slate-400'} 
+                                                ${!p.active && 'opacity-30 cursor-not-allowed'}`}
+                                        >
+                                            {p.name} {!p.active && "(Coming Soon)"}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                <div className="pt-8 flex justify-center lg:justify-start items-center gap-6">
+                                    <CTAButton variant="primary" className="px-10 py-5">Apply to Join</CTAButton>
+                                    <button className="text-slate-900 font-bold underline decoration-2 underline-offset-4">Download Brochure</button>
+                                </div>
+                            </div>
+
+                            <div className="bg-white p-10 border border-slate-100 rounded-lg max-w-md ml-auto w-full shadow-2xl">
+                                <h3 className="text-2xl font-black mb-2 text-slate-900 uppercase tracking-tight">Admission Gate</h3>
+                                <p className="text-sm text-slate-400 mb-8 font-medium italic">High-performance candidates only.</p>
+                                <form className="space-y-4">
+                                    <input type="text" placeholder="Full Name" className="w-full p-4 border border-slate-100 bg-slate-50 rounded text-sm outline-none" required />
+                                    <input type="email" placeholder="Email" className="w-full p-4 border border-slate-100 bg-slate-50 rounded text-sm outline-none" required />
+                                    <button className="w-full bg-cyan-500 text-white py-5 rounded font-black text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all">Submit Application</button>
+                                </form>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* SYLLABUS SECTION */}
+                    <section id="syllabus" className="py-32 px-6 bg-slate-50 border-y border-slate-200">
+                        <div className="max-w-7xl mx-auto">
+                            <h2 className="text-4xl font-black text-center mb-20 text-slate-900 uppercase tracking-tighter">
+                                {currentProgram.name} Curriculum
+                            </h2>
+                            <div className="flex flex-col lg:flex-row gap-8 min-h-[500px]">
+                                <div className="lg:w-1/3 flex flex-col space-y-3">
+                                    {programSyllabus.map((mod, idx) => (
+                                        <button 
+                                            key={idx} 
+                                            onClick={() => setActiveModuleIdx(idx)}
+                                            className={`p-6 text-left rounded-xl transition-all border font-bold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-cyan-500 border-cyan-500 text-white shadow-xl' : 'bg-white border-slate-100 text-slate-600 hover:border-cyan-200'}`}
+                                        >
+                                            <span className="text-md">{idx + 1}. {mod.title}</span>
+                                            <Icon name="chevron-right" size={16} className={`transition-transform ${activeModuleIdx === idx ? 'translate-x-1 opacity-100' : 'opacity-0'}`} />
+                                        </button>
+                                    ))}
+                                </div>
+                                <div className="lg:w-2/3 bg-white p-12 rounded-2xl border border-slate-200 flex flex-col shadow-sm">
+                                    {programSyllabus[activeModuleIdx] ? (
+                                        <>
+                                            <h3 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tight">
+                                                {programSyllabus[activeModuleIdx].title}
+                                            </h3>
+                                            <div className="grid md:grid-cols-2 gap-x-12 gap-y-5">
+                                                {programSyllabus[activeModuleIdx].content?.map((bullet, i) => (
+                                                    <div key={i} className="flex items-start space-x-3 group">
+                                                        <Icon name="check-circle" size={16} className="text-cyan-400 mt-1 flex-shrink-0" />
+                                                        <span className="text-[15px] font-medium text-slate-600 leading-snug">{bullet}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div className="flex items-center justify-center h-full text-slate-300 italic">No syllabus data for this module.</div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* TOOLS SECTION */}
+                    <section id="tools" className="py-32 px-6 bg-white">
+                        <div className="max-w-7xl mx-auto text-center">
+                            <h2 className="text-4xl font-black mb-20 text-slate-900 uppercase tracking-tighter">Technology Stack</h2>
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+                                {programTools.map((tool, i) => (
+                                    <div key={i} className="p-10 border border-slate-50 rounded-2xl bg-slate-50 flex flex-col items-center justify-center space-y-6 shadow-sm hover:shadow-md transition-all">
+                                        <img src={tool.img} alt={tool.name} className="h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" onError={e => e.target.src='https://via.placeholder.com/64'} />
+                                        <span className="font-black text-slate-800 uppercase tracking-widest text-[10px]">{tool.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* PROJECTS SECTION */}
+                    <section id="projects" className="py-32 px-6 bg-slate-50">
+                        <div className="max-w-7xl mx-auto text-center">
+                            <h2 className="text-4xl font-black mb-20 text-slate-900 uppercase tracking-tighter">Industry Projects</h2>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                                {programProjects.map((proj, idx) => (
+                                    <div key={idx} className="bg-white rounded-2xl overflow-hidden border border-slate-200 group shadow-sm hover:shadow-2xl transition-all">
+                                        <div className="aspect-video bg-slate-200 relative overflow-hidden">
+                                            <img src={proj.img} alt={proj.title} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500" onError={e => e.target.src='https://via.placeholder.com/400x225'} />
+                                            {proj.link && <a href={proj.link} target="_blank" className="absolute inset-0 bg-slate-900/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><div className="border-2 border-white text-white px-6 py-2 font-black uppercase text-xs">Case Study</div></a>}
+                                        </div>
+                                        <div className="p-8 text-left">
+                                            <h4 className="font-black text-xl text-slate-900 uppercase">{proj.title}</h4>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    <Footer />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
+
+
+
